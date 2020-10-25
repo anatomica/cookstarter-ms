@@ -3,19 +3,22 @@ package ru.guteam.restaurant_service.service;
 import java.util.List;
 
 import ru.guteam.restaurant_service.model.Restaurant;
+import lombok.NonNull;
+import org.springframework.http.ResponseEntity;
 
 /**
  * Интерфейс реализующий CRUD операции.
  */
 public interface RestaurantService {
 
-    void create(Restaurant restaurant);
+    ResponseEntity<Restaurant> create(@NonNull Restaurant restaurant);
 
-    List<Restaurant> readAll();
+    ResponseEntity<List<Restaurant>> readAll();
 
-    Restaurant read(int id);
+    ResponseEntity<Restaurant> read(@NonNull Long id);
 
-    boolean update(Restaurant restaurant, int id);
+    ResponseEntity<Restaurant> update(@NonNull Restaurant restaurant);
 
-    boolean delete(int id);
+    ResponseEntity<Restaurant> delete(@NonNull Long id);
+
 }

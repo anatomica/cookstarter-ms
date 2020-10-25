@@ -1,11 +1,12 @@
 package ru.guteam.restaurant_service.controller;
 
+
 import java.util.List;
+
 
 import ru.guteam.restaurant_service.model.Restaurant;
 import ru.guteam.restaurant_service.service.RestaurantService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,34 +27,26 @@ public class RestaurantController {
 
     @PostMapping(value = "/restaurants")
     public ResponseEntity<?> create(@RequestBody Restaurant restaurant) {
-        restaurantService.create(restaurant);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return restaurantService.create(restaurant);
     }
 
     @GetMapping(value = "/restaurants")
-    public ResponseEntity<List<Restaurant>> read() {
-        final List<Restaurant> restaurants = restaurantService.readAll();
-
-        return restaurants != null && !restaurants.isEmpty()
-                ? new ResponseEntity<>(restaurants, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<Restaurant>> readAll() {
+        return restaurantService.readAll();
     }
 
-    @GetMapping(value = "/restaurants/{id}")
-    public ResponseEntity<Restaurant> read(@PathVariable(name = "id") int id) {
-        final Restaurant restaurant = restaurantService.read(id);
+    @GetMapping("/restaurants/{id}")
+    public ResponseEntity<Restaurant> getById(@PathVariable("id") Long id) {
+        return restaurantService.read(id);
+    }
 
-        return restaurant != null
-                ? new ResponseEntity<>(restaurant, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @PostMapping("/restaurants/update")
+    public ResponseEntity<Restaurant> updateestaurant( @RequestBody Restaurant restaurant) {
+        return  restaurantService.update(restaurant);
     }
 
     @DeleteMapping(value = "/restaurants/{id}")
-    public ResponseEntity<?> delete(@PathVariable(name = "id") int id) {
-        final boolean deleted = restaurantService.delete(id);
-
-        return deleted
-                ? new ResponseEntity<>(HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
+    public ResponseEntity<?> delete(@PathVariable(name = "id") Long id) {
+        return restaurantService.delete(id);
     }
 }

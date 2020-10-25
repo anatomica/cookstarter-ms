@@ -11,7 +11,7 @@ POST /reg/customer
      "pass1": 'string', //обязательно
      "pass2": 'string', //обязательно
      "firstName": 'string', //обязательно
-     "secondName": 'string', //обязательно
+     "lastName": 'string', //обязательно
      "email": 'string', //обязательно
      
  }

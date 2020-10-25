@@ -10,8 +10,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import ru.guteam.customer_service.controllers.utils.UsernameAndPasswordRequest;
 import ru.guteam.customer_service.controllers.utils.JwtTokenUtil;
+import ru.guteam.customer_service.controllers.utils.TokenResponse;
+import ru.guteam.customer_service.controllers.utils.UsernameAndPasswordRequest;
 import ru.guteam.customer_service.services.UsersService;
 
 @Slf4j
@@ -32,7 +33,7 @@ public class AuthController {
             return new ResponseEntity<>("Неверные логин или пароль", HttpStatus.UNAUTHORIZED);
         }
         UserDetails userDetails = usersService.loadUserByUsername(authRequest.getUsername());
-        String token = jwtTokenUtil.generateToken(userDetails);
+        TokenResponse token = new TokenResponse(jwtTokenUtil.generateToken(userDetails));
         return new ResponseEntity<>(token, HttpStatus.OK);
     }
 

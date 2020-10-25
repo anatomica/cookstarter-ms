@@ -1,5 +1,6 @@
 package ru.guteam.picture_service.controller;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,30 +15,30 @@ import java.io.IOException;
 import static ru.guteam.cookstarter.api.dto.RequestMessageHeaders.JWT_TOKEN_HEADER;
 
 @RestController
-@RequestMapping("/picture")
+@RequestMapping("/picture/api")
 @RequiredArgsConstructor
 public class RestPictureController {
     private final PictureService pictureService;
 
     @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<StatusResponse> addPicture(@RequestBody MultipartFile multipartFile,
+    public ResponseEntity<StatusResponse> addPicture(@RequestParam("file") MultipartFile file,
                                                      @RequestHeader(JWT_TOKEN_HEADER) String token) throws IOException {
-        Long id = pictureService.insert(multipartFile);
+        Long id = pictureService.insert(file);
         return StatusResponseBuilder.okWithId(String.valueOf(id));
     }
 
     @PostMapping(value = "/update/{pictureId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ResponseEntity<StatusResponse> updatePicture(@RequestBody MultipartFile multipartFile,
+    public ResponseEntity<StatusResponse> updatePicture(@RequestParam("file") MultipartFile file,
                                                         @RequestHeader(JWT_TOKEN_HEADER) String token,
-                                                        @PathVariable("pictureId") Long pictureId) throws IOException {
-        pictureService.update(multipartFile, pictureId);
+                                                        @NonNull @PathVariable("pictureId") Long pictureId) throws IOException {
+        pictureService.update(file, pictureId);
         return StatusResponseBuilder.ok();
     }
 
-    @GetMapping("/detele/{id}")
-    public ResponseEntity<StatusResponse> deletePicture(@PathVariable("id") Long id,
-                                                        @RequestHeader(JWT_TOKEN_HEADER) String token) {
-        pictureService.deletePicture(id);
+    @GetMapping("/delete/{pictureId}")
+    public ResponseEntity<StatusResponse> deletePicture(@NonNull @PathVariable("pictureId") Long pictureId,
+                                                        @RequestHeader(JWT_TOKEN_HEADER) String token) throws IOException {
+        pictureService.deletePicture(pictureId);
         return StatusResponseBuilder.ok();
     }
 }
