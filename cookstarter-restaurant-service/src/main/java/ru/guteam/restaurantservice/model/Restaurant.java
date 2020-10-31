@@ -19,7 +19,5 @@ public class Restaurant {
     private String name;
     private String address;
     private String description;
-    @OneToOne
-    private Contact contact;
     private Long pictureId;
 }

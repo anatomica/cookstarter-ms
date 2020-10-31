@@ -1,20 +1,18 @@
 package ru.guteam.picture_service.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+import lombok.experimental.SuperBuilder;
 import javax.persistence.*;
-import java.util.List;
 
-@Entity
+
+@MappedSuperclass
+@SuperBuilder
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "pictures")
-public class Picture {
+public abstract class AbsctractPicture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

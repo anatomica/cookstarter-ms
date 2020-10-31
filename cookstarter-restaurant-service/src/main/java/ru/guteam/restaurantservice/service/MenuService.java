@@ -1,12 +1,12 @@
 package ru.guteam.restaurantservice.service;
 
-import ru.guteam.restaurantservice.dto.Menu;
+import ru.guteam.restaurantservice.dto.MenuDTO;
 import ru.guteam.restaurantservice.model.Dish;
 
 import java.util.List;
 
 public interface MenuService {
-    void createMenu(Menu menu);
+    void createMenu(MenuDTO menu);
 
     List<Dish> getMenu(Long restaurant_id);
 

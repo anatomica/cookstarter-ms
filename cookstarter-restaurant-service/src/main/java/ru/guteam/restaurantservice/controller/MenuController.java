@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.guteam.restaurantservice.dto.Menu;
+import ru.guteam.restaurantservice.dto.MenuDTO;
 import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.service.MenuService;
 
@@ -24,7 +24,7 @@ public class MenuController {
     @CrossOrigin
     @PostMapping("/add")
     public ResponseEntity<HttpStatus> addMenu(@RequestHeader(JWT_HEADER) String token,
-                                              @RequestBody Menu menu) {
+                                              @RequestBody MenuDTO menu) {
         menuService.createMenu(menu);
         return status(OK);
     }

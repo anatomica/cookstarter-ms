@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.guteam.restaurantservice.dto.ContactDTO;
 import ru.guteam.restaurantservice.model.Contact;
 import ru.guteam.restaurantservice.service.ContactService;
 
@@ -21,16 +22,16 @@ public class ContactController {
     @CrossOrigin
     @PostMapping("/add")
     public ResponseEntity<HttpStatus> addContact(@RequestHeader(JWT_HEADER) String token,
-                                                 @RequestBody Contact contact) {
+                                                 @RequestBody ContactDTO contact) {
         contactService.saveContact(contact);
         return status(OK);
     }
 
     @CrossOrigin
     @GetMapping("/get/{restaurantId}")
-    public ResponseEntity<Contact> getContact(@RequestHeader(JWT_HEADER) String token,
-                                              @PathVariable Long restaurantId) {
-        Contact contact = contactService.getContactByRestaurantId(restaurantId);
+    public ResponseEntity<ContactDTO> getContact(@RequestHeader(JWT_HEADER) String token,
+                                                 @PathVariable Long restaurantId) {
+        ContactDTO contact = contactService.getContactByRestaurantId(restaurantId);
         return contactAndStatus(contact, OK);
     }
 
@@ -38,7 +39,7 @@ public class ContactController {
     @PostMapping("update/{restaurantId}")
     public ResponseEntity<HttpStatus> updateContact(@RequestHeader(JWT_HEADER) String token,
                                                     @PathVariable Long restaurantId,
-                                                    @RequestBody Contact contact) {
+                                                    @RequestBody ContactDTO contact) {
         contactService.updateContact(restaurantId, contact);
         return status(OK);
     }

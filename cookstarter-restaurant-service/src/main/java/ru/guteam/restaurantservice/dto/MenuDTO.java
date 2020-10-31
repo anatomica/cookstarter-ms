@@ -9,6 +9,6 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class Menu {
+public class MenuDTO {
     private List<Dish> dishes;
 }
