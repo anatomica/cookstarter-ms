@@ -28,5 +28,9 @@ spring:
 
 app:
   name-length: 13
+  path-directory-test: H:\Pictures
+  path-directory-restaurant: H:\Pictures\Restaurant
+  path-directory-menu: H:\Pictures\Menu
+  path-directory-avatar: H:\Pictures\Avatar
   jwt:
     secret-key: topsecretkey123rieubherotuh3498th398gh395g8h598gh4g8gidufghdifughi43gg4334t3h4gi34uhgi35uhgi35ughi45ugho98dhf98bhg
