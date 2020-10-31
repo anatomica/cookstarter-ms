@@ -32,16 +32,15 @@ public class RestaurantController {
     @GetMapping("/getByName/{name}")
     public ResponseEntity<List> getRestaurantsByName(@RequestHeader(JWT_HEADER) String token,
                                                      @PathVariable String name) {
-        List<RestaurantDTO> restaurantsByName = restaurantService.getRestaurantsByName(name);
+        List<Restaurant> restaurantsByName = restaurantService.getRestaurantsByName(name);
         return listAndStatus(restaurantsByName, OK);
     }
 
     @CrossOrigin
-    @GetMapping("/getByAddress/{address}")
-    public ResponseEntity<List> getRestaurantsByAddress(@RequestHeader(JWT_HEADER) String token,
-                                                        @PathVariable String address) {
-        List<RestaurantDTO> restaurantsByAddress = restaurantService.getRestaurantsByAddress(address);
-        return listAndStatus(restaurantsByAddress, OK);
+    @GetMapping("/getAll")
+    public ResponseEntity<List> getRestaurantsByAddress(@RequestHeader(JWT_HEADER) String token) {
+        List<Restaurant> restaurants = restaurantService.getAll();
+        return listAndStatus(restaurants, OK);
     }
 
     @CrossOrigin

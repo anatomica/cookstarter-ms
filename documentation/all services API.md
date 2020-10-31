@@ -67,6 +67,7 @@ POST /auth
 POST /restaurant/add
 ```json5
 {
+     "id": 1, 
      "name": 'string', 
      "description": 'string', 
      "picture": 1 // restaurant picture id, no requirement
@@ -120,9 +121,26 @@ GET /restaurant/getByName{name}
  }
 ```
 
-**Получение ресторана или списка по адресу(его части)**
+**Получение всех ресторанов**
+GET /restaurant/getAll
 
-Не готово
+ответ
+```json5
+{
+          restaurant1:{
+          "id": 1,
+          "name": 'string', 
+          "description": 'string', 
+          "picture": 1 // restaurant picture id
+          },
+          restaurant2:{
+          "id": 1,
+          "name": 'string', 
+          "description": 'string', 
+          "picture": 1 // restaurant picture id
+          },
+ }
+```
 
 **Удаление карточки ресторана**
 

@@ -10,11 +10,10 @@ public interface RestaurantService {
 
     Long saveRestaurant(RestaurantDTO restaurant);
 
-    List<RestaurantDTO> getRestaurantsByName(String name);
+    List<Restaurant> getRestaurantsByName(String name);
 
-    List<RestaurantDTO> getRestaurantsByAddress(String address);
+    List<Restaurant> getAll();
 
-    //some method for many restaurants
     void updateRestaurant(Restaurant restaurant);
 
     void deleteRestaurant(Long id);
