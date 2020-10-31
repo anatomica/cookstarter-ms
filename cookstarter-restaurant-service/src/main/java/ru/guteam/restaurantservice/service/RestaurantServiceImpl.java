@@ -3,9 +3,11 @@ package ru.guteam.restaurantservice.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import ru.guteam.restaurantservice.dto.RestaurantDTO;
 import ru.guteam.restaurantservice.exception.RestaurantNotFoundException;
 import ru.guteam.restaurantservice.model.Restaurant;
 import ru.guteam.restaurantservice.repo.RestaurantRepo;
+import ru.guteam.restaurantservice.util.Mapper;
 
 import java.util.List;
 
@@ -13,7 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepo restaurantRepo;
-
+    private final Mapper mapper;
     @Override
     public Restaurant getRestaurant(Long id) {
         return restaurantRepo.findById(id).orElseThrow(() -> new RestaurantNotFoundException(id));
@@ -21,8 +23,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     @Transactional
-    public Long saveRestaurant(Restaurant restaurant) {
-        restaurantRepo.save(restaurant);
+    public Long saveRestaurant(RestaurantDTO restaurant) {
+        restaurantRepo.save(mapper.mapToRestaurant(restaurant));
         Long id = restaurantRepo.findByName(restaurant.getName())
                 .orElseThrow(() -> new RestaurantNotFoundException(restaurant.getName())).getId();
         return id;
@@ -30,23 +32,23 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     @Transactional
-    public List<Restaurant> getRestaurantsByName(String name) {
+    public List<RestaurantDTO> getRestaurantsByName(String name) {
         List<Restaurant> restaurants = restaurantRepo.findByNameLike(name)
                 .orElseThrow(() -> new RestaurantNotFoundException(name));
-        return restaurants;
+        return mapper.mapToRestaurantDTOList(restaurants);
     }
 
     @Override
     @Transactional
-    public List<Restaurant> getRestaurantsByAddress(String address) {
+    public List<RestaurantDTO> getRestaurantsByAddress(String address) {
         List<Restaurant> restaurants = restaurantRepo.findByAddress(address)
                 .orElseThrow(() -> new RestaurantNotFoundException(address));
-        return restaurants;
+        return mapper.mapToRestaurantDTOList(restaurants);
     }
 
     @Override
     @Transactional
-    public void updateRestaurant(Restaurant restaurant) {
+    public void updateRestaurant(RestaurantDTO restaurant) {
         saveRestaurant(restaurant);
     }
 

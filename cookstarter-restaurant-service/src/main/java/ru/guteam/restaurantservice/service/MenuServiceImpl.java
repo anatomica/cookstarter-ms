@@ -3,7 +3,7 @@ package ru.guteam.restaurantservice.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.guteam.restaurantservice.dto.Menu;
+import ru.guteam.restaurantservice.dto.MenuDTO;
 import ru.guteam.restaurantservice.exception.GetMenuException;
 import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.repo.DishRepo;
@@ -17,7 +17,7 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public void createMenu(Menu menu) {
+    public void createMenu(MenuDTO menu) {
         dishRepo.saveAll(menu.getDishes());
     }
 

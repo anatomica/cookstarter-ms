@@ -1,16 +1,17 @@
 package ru.guteam.restaurantservice.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.guteam.restaurantservice.dto.RestaurantDTO;
 import ru.guteam.restaurantservice.model.Restaurant;
 import ru.guteam.restaurantservice.service.RestaurantService;
 
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
-import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.idAndStatus;
-import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.listAndStatus;
+import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.*;
 import static ru.guteam.restaurantservice.util.RequestHeaders.JWT_HEADER;
 
 @RestController
@@ -22,7 +23,7 @@ public class RestaurantController {
     @CrossOrigin
     @PostMapping("/add")
     public ResponseEntity<Long> addRestaurant(@RequestHeader(JWT_HEADER) String token,
-                                              @RequestBody Restaurant restaurant) {
+                                              @RequestBody RestaurantDTO restaurant) {
         Long restaurantId = restaurantService.saveRestaurant(restaurant);
         return idAndStatus(restaurantId, OK);
     }
@@ -45,10 +46,10 @@ public class RestaurantController {
 
     @CrossOrigin
     @PostMapping("/update")
-    public ResponseEntity<Long> updateRestaurant(@RequestHeader(JWT_HEADER) String token,
-                                                 @RequestBody Restaurant restaurant) {
+    public ResponseEntity<HttpStatus> updateRestaurant(@RequestHeader(JWT_HEADER) String token,
+                                                       @RequestBody RestaurantDTO restaurant) {
         restaurantService.updateRestaurant(restaurant);
-        return idAndStatus(restaurant.getId(), OK);
+        return status(OK);
     }
 
     @CrossOrigin
