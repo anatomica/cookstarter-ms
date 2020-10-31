@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 public class SystemRestaurant {
 
     @NotNull
-    @ApiModelProperty(notes = "Unique identifier of the restaurant. No two books can have the same id.", example = "1", required = true, position = 1)
+    @ApiModelProperty(notes = "Unique identifier of the restaurant. No two restaurants can have the same id.", example = "1", required = true, position = 1)
     private Long id;
     @NotNull
     @ApiModelProperty(notes = "Unique username", example = "89110002233", required = true, position = 2)
