@@ -21,5 +21,5 @@ public class Restaurant {
     private String description;
     @OneToOne
     private Contact contact;
-    private Long picture_id;
+    private Long pictureId;
 }

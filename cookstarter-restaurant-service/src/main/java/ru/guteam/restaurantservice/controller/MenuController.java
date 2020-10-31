@@ -5,8 +5,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.guteam.restaurantservice.dto.Menu;
+import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.service.MenuService;
 
+import java.util.List;
+
+import static org.springframework.http.HttpStatus.OK;
+import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.listAndStatus;
+import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.status;
 import static ru.guteam.restaurantservice.util.RequestHeaders.JWT_HEADER;
 
 @RestController
@@ -17,18 +23,18 @@ public class MenuController {
 
     @CrossOrigin
     @PostMapping("/add")
-    public ResponseEntity addMenu(@RequestHeader(JWT_HEADER) String token,
-                                  @RequestBody Menu menu) {
+    public ResponseEntity<HttpStatus> addMenu(@RequestHeader(JWT_HEADER) String token,
+                                              @RequestBody Menu menu) {
         menuService.createMenu(menu);
-        return new ResponseEntity(HttpStatus.OK);
+        return status(OK);
     }
 
     @CrossOrigin
-    @GetMapping("/get/{restaurant_id}")
-    public ResponseEntity<Menu> getMenu(@RequestHeader(JWT_HEADER) String token,
-                                        @PathVariable Long restaurant_id) {
-        Menu menu = menuService.getMenu(restaurant_id);
-        return new ResponseEntity(menu, HttpStatus.OK);
+    @GetMapping("/get/{restaurantId}")
+    public ResponseEntity<List> getMenu(@RequestHeader(JWT_HEADER) String token,
+                                        @PathVariable Long restaurantId) {
+        List<Dish> menu = menuService.getMenu(restaurantId);
+        return listAndStatus(menu, OK);
     }
 
 

@@ -18,6 +18,6 @@ public class Dish {
     private String name;
     private Integer price;
     private String description;
-    private Long picture_id;
+    private Long pictureId;
     private Long restaurantId;
 }

@@ -7,6 +7,5 @@ import java.util.Optional;
 
 public interface ContactRepo extends JpaRepository<Contact, Long> {
     Optional<Contact> findByRestaurantId(Long restaurant_id);
-
     void deleteByRestaurantId(Long restaurant_id);
 }

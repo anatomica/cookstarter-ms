@@ -7,6 +7,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.guteam.restaurantservice.model.Contact;
 import ru.guteam.restaurantservice.service.ContactService;
 
+import static org.springframework.http.HttpStatus.OK;
+import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.contactAndStatus;
+import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.status;
 import static ru.guteam.restaurantservice.util.RequestHeaders.JWT_HEADER;
 
 @RestController
@@ -17,34 +20,34 @@ public class ContactController {
 
     @CrossOrigin
     @PostMapping("/add")
-    public ResponseEntity addContact(@RequestHeader(JWT_HEADER) String token,
-                                     @RequestBody Contact contact) {
+    public ResponseEntity<HttpStatus> addContact(@RequestHeader(JWT_HEADER) String token,
+                                                 @RequestBody Contact contact) {
         contactService.saveContact(contact);
-        return new ResponseEntity(HttpStatus.OK);
+        return status(OK);
     }
 
     @CrossOrigin
-    @GetMapping("/get/{restaurant_id}")
+    @GetMapping("/get/{restaurantId}")
     public ResponseEntity<Contact> getContact(@RequestHeader(JWT_HEADER) String token,
-                                              @PathVariable Long restaurant_id) {
-        Contact contact = contactService.getContactByRestaurantId(restaurant_id);
-        return new ResponseEntity(contact, HttpStatus.OK);
+                                              @PathVariable Long restaurantId) {
+        Contact contact = contactService.getContactByRestaurantId(restaurantId);
+        return contactAndStatus(contact, OK);
     }
 
     @CrossOrigin
-    @PostMapping("update/{restaurant_id}")
-    public ResponseEntity updateContact(@RequestHeader(JWT_HEADER) String token,
-                                        @PathVariable Long restaurant_id,
-                                        @RequestBody Contact contact) {
-        contactService.updateContact(restaurant_id, contact);
-        return new ResponseEntity(HttpStatus.OK);
+    @PostMapping("update/{restaurantId}")
+    public ResponseEntity<HttpStatus> updateContact(@RequestHeader(JWT_HEADER) String token,
+                                                    @PathVariable Long restaurantId,
+                                                    @RequestBody Contact contact) {
+        contactService.updateContact(restaurantId, contact);
+        return status(OK);
     }
 
     @CrossOrigin
-    @GetMapping("/delete/{restaurant_id}")
-    public ResponseEntity deleteContact(@RequestHeader(JWT_HEADER) String token,
-                                        @PathVariable Long restaurant_id) {
-        contactService.deleteContactByRestaurantId(restaurant_id);
-        return new ResponseEntity(HttpStatus.OK);
+    @GetMapping("/delete/{restaurantId}")
+    public ResponseEntity<HttpStatus> deleteContact(@RequestHeader(JWT_HEADER) String token,
+                                                    @PathVariable Long restaurantId) {
+        contactService.deleteContactByRestaurantId(restaurantId);
+        return status(OK);
     }
 }

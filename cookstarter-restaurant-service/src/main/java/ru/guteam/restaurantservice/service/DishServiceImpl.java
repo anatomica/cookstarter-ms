@@ -15,22 +15,27 @@ public class DishServiceImpl implements DishService {
 
     @Override
     @Transactional
-    public void saveDish(Dish dish) {
-        dishRepo.save(dish);
+    public Long saveDish(Dish dish) {
+        return dishRepo.save(dish).getId();
     }
 
     @Override
     @Transactional
-    public void updateDish(Dish dish) {
+    public Long updateDish(Dish dish) {
         Dish oldDish = dishRepo.findByNameAndRestaurantId(dish.getName(), dish.getRestaurantId())
-                .orElseThrow(DishNotFountException::new);
+                .orElseThrow(() -> new DishNotFountException(dish.getName(), dish.getRestaurantId()));
         dish.setId(oldDish.getId());
         saveDish(dish);
+        return dish.getId();
     }
 
     @Override
     @Transactional
-    public void deleteDish(Dish dish) {
+    public Long deleteDish(Dish dish) {
+        Long id = dishRepo.findByNameAndRestaurantId(dish.getName(), dish.getRestaurantId())
+                .orElseThrow(() -> new DishNotFountException(dish.getName(), dish.getRestaurantId()))
+                .getId();
         dishRepo.deleteByNameAndRestaurantId(dish.getName(), dish.getRestaurantId());
+        return id;
     }
 }

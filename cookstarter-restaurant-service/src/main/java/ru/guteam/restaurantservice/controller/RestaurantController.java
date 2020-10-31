@@ -1,7 +1,6 @@
 package ru.guteam.restaurantservice.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.guteam.restaurantservice.model.Restaurant;
@@ -9,6 +8,9 @@ import ru.guteam.restaurantservice.service.RestaurantService;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.OK;
+import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.idAndStatus;
+import static ru.guteam.restaurantservice.controller.util.ResponseBuilder.listAndStatus;
 import static ru.guteam.restaurantservice.util.RequestHeaders.JWT_HEADER;
 
 @RestController
@@ -21,8 +23,8 @@ public class RestaurantController {
     @PostMapping("/add")
     public ResponseEntity<Long> addRestaurant(@RequestHeader(JWT_HEADER) String token,
                                               @RequestBody Restaurant restaurant) {
-        Long restaurant_id = restaurantService.saveRestaurant(restaurant);
-        return new ResponseEntity(restaurant_id, HttpStatus.OK);
+        Long restaurantId = restaurantService.saveRestaurant(restaurant);
+        return idAndStatus(restaurantId, OK);
     }
 
     @CrossOrigin
@@ -30,7 +32,7 @@ public class RestaurantController {
     public ResponseEntity<List> getRestaurantsByName(@RequestHeader(JWT_HEADER) String token,
                                                      @PathVariable String name) {
         List<Restaurant> restaurantsByName = restaurantService.getRestaurantsByName(name);
-        return new ResponseEntity(restaurantsByName, HttpStatus.OK);
+        return listAndStatus(restaurantsByName, OK);
     }
 
     @CrossOrigin
@@ -38,23 +40,23 @@ public class RestaurantController {
     public ResponseEntity<List> getRestaurantsByAddress(@RequestHeader(JWT_HEADER) String token,
                                                         @PathVariable String address) {
         List<Restaurant> restaurantsByAddress = restaurantService.getRestaurantsByAddress(address);
-        return new ResponseEntity(restaurantsByAddress, HttpStatus.OK);
+        return listAndStatus(restaurantsByAddress, OK);
     }
 
     @CrossOrigin
     @PostMapping("/update")
-    public ResponseEntity updateRestaurant(@RequestHeader(JWT_HEADER) String token,
-                                           @RequestBody Restaurant restaurant) {
+    public ResponseEntity<Long> updateRestaurant(@RequestHeader(JWT_HEADER) String token,
+                                                 @RequestBody Restaurant restaurant) {
         restaurantService.updateRestaurant(restaurant);
-        return new ResponseEntity(HttpStatus.OK);
+        return idAndStatus(restaurant.getId(), OK);
     }
 
     @CrossOrigin
     @GetMapping("/delete/{id}")
-    public ResponseEntity deleteRestaurant(@RequestHeader(JWT_HEADER) String token,
-                                           @PathVariable Long id) {
+    public ResponseEntity<Long> deleteRestaurant(@RequestHeader(JWT_HEADER) String token,
+                                                 @PathVariable Long id) {
         restaurantService.deleteRestaurant(id);
-        return new ResponseEntity(HttpStatus.OK);
+        return idAndStatus(id, OK);
     }
 
 
