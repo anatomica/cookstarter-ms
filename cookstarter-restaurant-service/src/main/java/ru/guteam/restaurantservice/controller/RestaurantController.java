@@ -32,7 +32,7 @@ public class RestaurantController {
     @GetMapping("/getByName/{name}")
     public ResponseEntity<List> getRestaurantsByName(@RequestHeader(JWT_HEADER) String token,
                                                      @PathVariable String name) {
-        List<Restaurant> restaurantsByName = restaurantService.getRestaurantsByName(name);
+        List<RestaurantDTO> restaurantsByName = restaurantService.getRestaurantsByName(name);
         return listAndStatus(restaurantsByName, OK);
     }
 
@@ -40,7 +40,7 @@ public class RestaurantController {
     @GetMapping("/getByAddress/{address}")
     public ResponseEntity<List> getRestaurantsByAddress(@RequestHeader(JWT_HEADER) String token,
                                                         @PathVariable String address) {
-        List<Restaurant> restaurantsByAddress = restaurantService.getRestaurantsByAddress(address);
+        List<RestaurantDTO> restaurantsByAddress = restaurantService.getRestaurantsByAddress(address);
         return listAndStatus(restaurantsByAddress, OK);
     }
 

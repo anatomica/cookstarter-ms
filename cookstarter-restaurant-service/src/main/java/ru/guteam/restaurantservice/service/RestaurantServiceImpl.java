@@ -4,7 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.guteam.restaurantservice.dto.RestaurantDTO;
+import ru.guteam.restaurantservice.exception.DishNotFountException;
 import ru.guteam.restaurantservice.exception.RestaurantNotFoundException;
+import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.model.Restaurant;
 import ru.guteam.restaurantservice.repo.RestaurantRepo;
 import ru.guteam.restaurantservice.util.Mapper;
@@ -49,7 +51,11 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     @Transactional
     public void updateRestaurant(RestaurantDTO restaurant) {
-        saveRestaurant(restaurant);
+        Restaurant oldRestaurant = restaurantRepo.findByName(restaurant.getName())
+                .orElseThrow(() -> new RestaurantNotFoundException(restaurant.getName()));
+        Restaurant newRestaurant = mapper.mapToRestaurant(restaurant);
+        newRestaurant.setId(oldRestaurant.getId());
+        restaurantRepo.save(newRestaurant);
     }
 
     @Override

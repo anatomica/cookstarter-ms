@@ -15,8 +15,6 @@ public class RestaurantDTO {
     @NotNull
     private String name;
     @NotNull
-    private String address;
-    @NotNull
     private String description;
     private Long pictureId;
 }

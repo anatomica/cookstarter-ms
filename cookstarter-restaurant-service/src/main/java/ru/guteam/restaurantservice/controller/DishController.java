@@ -3,6 +3,7 @@ package ru.guteam.restaurantservice.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.guteam.restaurantservice.dto.DishDTO;
 import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.service.DishService;
 
@@ -19,7 +20,7 @@ public class DishController {
     @CrossOrigin
     @PostMapping("/add")
     public ResponseEntity<Long> addDish(@RequestHeader(JWT_HEADER) String token,
-                                        @RequestBody Dish dish) {
+                                        @RequestBody DishDTO dish) {
         Long id = dishService.saveDish(dish);
         return idAndStatus(id, OK);
     }
@@ -27,7 +28,7 @@ public class DishController {
     @CrossOrigin
     @PostMapping("/update")
     public ResponseEntity<Long> updateDish(@RequestHeader(JWT_HEADER) String token,
-                                           @RequestBody Dish dish) {
+                                           @RequestBody DishDTO dish) {
         Long id = dishService.updateDish(dish);
         return idAndStatus(id, OK);
     }
@@ -35,7 +36,7 @@ public class DishController {
     @CrossOrigin
     @GetMapping("/delete")
     public ResponseEntity<Long> deleteDish(@RequestHeader(JWT_HEADER) String token,
-                                           @RequestBody Dish dish) {
+                                           @RequestBody DishDTO dish) {
         Long id = dishService.deleteDish(dish);
         return idAndStatus(id, OK);
     }
