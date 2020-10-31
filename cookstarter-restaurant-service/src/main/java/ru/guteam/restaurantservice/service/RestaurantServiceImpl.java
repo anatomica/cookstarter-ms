@@ -18,6 +18,7 @@ import java.util.List;
 public class RestaurantServiceImpl implements RestaurantService {
     private final RestaurantRepo restaurantRepo;
     private final Mapper mapper;
+
     @Override
     public Restaurant getRestaurant(Long id) {
         return restaurantRepo.findById(id).orElseThrow(() -> new RestaurantNotFoundException(id));
@@ -34,18 +35,16 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     @Transactional
-    public List<RestaurantDTO> getRestaurantsByName(String name) {
+    public List<Restaurant> getRestaurantsByName(String name) {
         List<Restaurant> restaurants = restaurantRepo.findByNameLike(name)
                 .orElseThrow(() -> new RestaurantNotFoundException(name));
-        return mapper.mapToRestaurantDTOList(restaurants);
+        return restaurants;
     }
 
     @Override
     @Transactional
-    public List<RestaurantDTO> getRestaurantsByAddress(String address) {
-        List<Restaurant> restaurants = restaurantRepo.findByAddress(address)
-                .orElseThrow(() -> new RestaurantNotFoundException(address));
-        return mapper.mapToRestaurantDTOList(restaurants);
+    public List<Restaurant> getAll() {
+        return restaurantRepo.findAll();
     }
 
     @Override

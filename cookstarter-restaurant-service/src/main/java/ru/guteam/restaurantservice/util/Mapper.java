@@ -1,5 +1,6 @@
 package ru.guteam.restaurantservice.util;
 
+import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import ru.guteam.restaurantservice.dto.ContactDTO;
@@ -13,39 +14,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class Mapper extends ModelMapper {
+@AllArgsConstructor
+public class Mapper {
+    private final ModelMapper modelMapper;
 
     public Restaurant mapToRestaurant(RestaurantDTO restaurantDTO) {
         Restaurant restaurant = new Restaurant();
-        map(restaurantDTO, restaurant);
+        modelMapper.map(restaurantDTO, restaurant);
         return restaurant;
     }
 
     public Dish mapToDish(DishDTO dishDTO) {
         Dish dish = new Dish();
-        map(dishDTO, dish);
+        modelMapper.map(dishDTO, dish);
         return dish;
     }
 
     public Contact mapToContact(ContactDTO contactDTO) {
         Contact contact = new Contact();
-        map(contactDTO, contact);
+        modelMapper.map(contactDTO, contact);
         return contact;
     }
 
     public ContactDTO mapToContactDTO(Contact contact) {
         ContactDTO contactDTO = new ContactDTO();
-        map(contact, contactDTO);
+        modelMapper.map(contact, contactDTO);
         return contactDTO;
     }
 
-    public List<RestaurantDTO> mapToRestaurantDTOList(List<Restaurant> restaurants) {
-        List<RestaurantDTO> restaurantDTOList = new ArrayList<>();
-        for (Restaurant restaurant : restaurants) {
-            RestaurantDTO restaurantDTO = new RestaurantDTO();
-            map(restaurant, restaurantDTO);
-            restaurantDTOList.add(restaurantDTO);
-        }
-        return restaurantDTOList;
-    }
 }
