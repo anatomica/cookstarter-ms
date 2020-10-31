@@ -50,12 +50,8 @@ public class RestaurantServiceImpl implements RestaurantService {
 
     @Override
     @Transactional
-    public void updateRestaurant(RestaurantDTO restaurant) {
-        Restaurant oldRestaurant = restaurantRepo.findByName(restaurant.getName())
-                .orElseThrow(() -> new RestaurantNotFoundException(restaurant.getName()));
-        Restaurant newRestaurant = mapper.mapToRestaurant(restaurant);
-        newRestaurant.setId(oldRestaurant.getId());
-        restaurantRepo.save(newRestaurant);
+    public void updateRestaurant(Restaurant restaurant) {
+        restaurantRepo.save(restaurant);
     }
 
     @Override

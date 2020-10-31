@@ -47,7 +47,7 @@ public class RestaurantController {
     @CrossOrigin
     @PostMapping("/update")
     public ResponseEntity<HttpStatus> updateRestaurant(@RequestHeader(JWT_HEADER) String token,
-                                                       @RequestBody RestaurantDTO restaurant) {
+                                                       @RequestBody Restaurant restaurant) {
         restaurantService.updateRestaurant(restaurant);
         return status(OK);
     }

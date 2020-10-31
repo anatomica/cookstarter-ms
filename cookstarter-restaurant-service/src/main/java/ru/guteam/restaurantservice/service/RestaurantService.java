@@ -15,7 +15,7 @@ public interface RestaurantService {
     List<RestaurantDTO> getRestaurantsByAddress(String address);
 
     //some method for many restaurants
-    void updateRestaurant(RestaurantDTO restaurant);
+    void updateRestaurant(Restaurant restaurant);
 
     void deleteRestaurant(Long id);
 }

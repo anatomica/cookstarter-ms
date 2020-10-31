@@ -8,7 +8,7 @@ public interface ContactService {
 
     ContactDTO getContactByRestaurantId(Long restaurant_id);
 
-    void updateContact(Long restaurant_id, ContactDTO contact);
+    void updateContact(ContactDTO contact);
 
     void deleteContactByRestaurantId(Long restaurant_id);
 
