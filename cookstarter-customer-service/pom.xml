@@ -29,10 +29,6 @@
             <artifactId>h2</artifactId>
             <version>1.4.194</version>
         </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-        </dependency>
         <!--Документация для REST-->
         <dependency>
             <groupId>io.springfox</groupId>
