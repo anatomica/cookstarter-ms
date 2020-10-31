@@ -1,0 +1,27 @@
+жвт валидация токен
+нотналл
+логирование
+валидация
+запилить базовый класс для модели
+запилить базовый класс для диш
+свагер
+ликвибазе
+еврика клиент
+красивый sql
+
+
+curl --header "Content-Type: application/json" --request GET  http:/localhost:8081/contact
+
+
+curl "Content-Type: application/json" --header '{"Authorization": "BearereyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDAiLCJyb2xlIjpbIkNVU1RPTUVSIl0sImV4cCI6MTYwNDAwMjYxNywiaWF0IjoxNjAzOTk5MDE3fQ.1F6qVMRnag4pftxDwMqwnjjLaei2SJKCwCFUm00IcgM"}' --request POST --data '{"id":1,"address":"lol","phone":"1234","location":"54362345","mail":"mail@mail.ru","website":"site.ru","restaurantId":10}' http:/localhost:8081/contact/add
+
+curl -H 'Accept: application/json' -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDAiLCJyb2xlIjpbIkNVU1RPTUVSIl0sImV4cCI6MTYwNDAwMjYxNywiaWF0IjoxNjAzOTk5MDE3fQ.1F6qVMRnag4pftxDwMqwnjjLaei2SJKCwCFUm00IcgM" --request POST --data '{"id":1,"address":"lol","phone":"1234","location":"54362345","mail":"mail@mail.ru","website":"site.ru","restaurantId":10}' http:/localhost:8081/contact/add
+
+POST http://localhost:8081/contact/add
+Accept: application/json
+Authorization: Bearer eJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDAiLCJyb2xlIjpbIkNVU1RPTUVSIl0sImV4cCI6MTYwNDAwMjYxNywiaWF0IjoxNjAzOTk5MDE3fQ.1F6qVMRnag4pftxDwMqwnjjLaei2SJKCwCFUm00IcgM
+Content-Type: application/json
+
+{"id":2,"address":"lolov","phone":"1234","location":"54362345","mail":"mail@.ru","website":"site.ru","restaurantId":10}
+
+<> 2020-10-30T121419.415.json

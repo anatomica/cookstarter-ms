@@ -1,10 +1,8 @@
 package ru.guteam.restaurantservice.exception;
 
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Value;
 
-@Getter
-public class DishNotFountException extends RuntimeException {
-    @Value("{exception.dish}")
-    private String message;
+public class DishNotFountException extends NotFountException {
+    public DishNotFountException(String name, Long restaurantId) {
+        super("Dish with name: '" + name + "' and restaurant id: '" + restaurantId + "' not found");
+    }
 }

@@ -19,22 +19,23 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact getContactByRestaurantId(Long restaurant_id) {
-        Contact contact = contactRepo.findByRestaurantId(restaurant_id).orElseThrow(ContactNotFoundException::new);
+    public Contact getContactByRestaurantId(Long restaurantId) {
+        Contact contact = contactRepo.findByRestaurantId(restaurantId)
+                .orElseThrow(() -> new ContactNotFoundException(restaurantId));
         return contact;
     }
 
     @Override
     @Transactional
-    public void updateContact(Long restaurant_id, Contact contact) {
-        Contact oldContact = getContactByRestaurantId(restaurant_id);
+    public void updateContact(Long id, Contact contact) {
+        Contact oldContact = getContactByRestaurantId(id);
         contact.setId(oldContact.getId());
         saveContact(contact);
     }
 
     @Override
     @Transactional
-    public void deleteContactByRestaurantId(Long restaurant_id) {
-        contactRepo.deleteByRestaurantId(restaurant_id);
+    public void deleteContactByRestaurantId(Long id) {
+        contactRepo.deleteByRestaurantId(id);
     }
 }

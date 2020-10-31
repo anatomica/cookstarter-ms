@@ -23,8 +23,8 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     @Transactional
-    public Menu getMenu(Long restaurant_id) {
-        List<Dish> dishes = dishRepo.findAllByRestaurantId(restaurant_id).orElseThrow(GetMenuException::new);
-        return new Menu(dishes);
+    public List<Dish> getMenu(Long restaurantId) {
+        return dishRepo.findAllByRestaurantId(restaurantId)
+                .orElseThrow(() -> new GetMenuException(restaurantId));
     }
 }
