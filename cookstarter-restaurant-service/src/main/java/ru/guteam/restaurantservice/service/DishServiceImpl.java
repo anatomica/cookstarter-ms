@@ -18,27 +18,23 @@ public class DishServiceImpl implements DishService {
 
     @Override
     @Transactional
-    public Long saveDish(DishDTO dish) {
-        return dishRepo.save(mapper.mapToDish(dish)).getId();
+    public void saveDish(DishDTO dish) {
+        dishRepo.save(mapper.mapToDish(dish));
     }
 
     @Override
     @Transactional
-    public Long updateDish(DishDTO dish) {
+    public void updateDish(DishDTO dish) {
         Dish oldDish = dishRepo.findByNameAndRestaurantId(dish.getName(), dish.getRestaurantId())
                 .orElseThrow(() -> new DishNotFountException(dish.getName(), dish.getRestaurantId()));
         Dish newDish = mapper.mapToDish(dish);
         newDish.setId(oldDish.getId());
-        return dishRepo.save(newDish).getId();
+        dishRepo.save(newDish);
     }
 
     @Override
     @Transactional
-    public Long deleteDish(DishDTO dish) {
-        Long id = dishRepo.findByNameAndRestaurantId(dish.getName(), dish.getRestaurantId())
-                .orElseThrow(() -> new DishNotFountException(dish.getName(), dish.getRestaurantId()))
-                .getId();
+    public void deleteDish(DishDTO dish) {
         dishRepo.deleteByNameAndRestaurantId(dish.getName(), dish.getRestaurantId());
-        return id;
     }
 }

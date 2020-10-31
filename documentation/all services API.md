@@ -59,72 +59,9 @@ POST /auth
 ```
 
 ### Restaurant service API
-1) ресторан
-{
-     "name": 'string', 
-     "description": 'string', 
-     "contact": {
-          "address": 'string',
-          "phone": 'string',
-          "location": 'string',
-          "mail": 'string',
-          "website": 'string',
-     },
-     "picture": 1 // restaurant picture_id
-}
-
-2) меню
-{ 
-          "dish1": {
-          "name": 'string',
-          "price": 0.99, 
-          "description": 'string', 
-          "picture": 10 
-           },
-          "dish2": {
-          "name": 'string',
-          "price": 0.99, 
-          "description": 'string', 
-          "picture": 11 // dish picture_id
-          }
-     }
-}
-тут нужно еще привязать меню к ресторану, но это что угодно на выбор - через pathvriable, через дополнительное поле в json
-
+     
 Любой запрос должен содержать header "Authentication" с Bearer + токеном, полученным при авторизации.
 
-**Добавление карточки ресторана**
-
-POST /restaurant/add
-```json5
-{
-     "name": 'string', 
-     "description": 'string', 
-     "contact": {
-          "address": 'string',
-          "phone": 'string',
-          "location": 'string',
-          "mail": 'string',
-          "website": 'string',
-     },
-
-     "menu": { 
-          "dish1": {
-          "name": 'string',
-          "price": 0.99, 
-          "description": 'string', 
-          "picture": 10 
-           },
-          "dish2": {
-          "name": 'string',
-          "price": 0.99, 
-          "description": 'string', 
-          "picture": 11 // dish picture_id
-          }
-     },
-     "picture": 1 // restaurant picture_id
- }
-```
 **Добавление карточки ресторана**
 
 POST /restaurant/add
@@ -148,73 +85,38 @@ POST /restaurant/add
 POST /restaurant/update
 ```json5
 {
+     "id": 1,
      "name": 'string', 
      "description": 'string', 
-     "contact": {
-          "address": 'string',
-          "phone": 'string',
-          "location": 'string',
-          "mail": 'string',
-          "website": 'string',
-     },
-
-     "menu": { 
-          "dish1": {
-          "name": 'string',
-          "price": 0.99, 
-          "description": 'string', 
-          "picture": 10 
-           },
-          "dish2": {
-          "name": 'string',
-          "price": 0.99, 
-          "description": 'string', 
-          "picture": 11 // dish picture_id
-          }
-     },
-     "picture": 1 // restaurant picture_id
+     "picture": 1 // restaurant picture id
  }
 ```
 ответ
 ```json5
 {
-    "status": "OK",
+    "status": "OK"
 }
 ```
 
-
 **Получение ресторана или списка по имени(его части)**
 
-GET /restaurant/getByName
+GET /restaurant/getByName{name}
 
 ответ
 ```json5
 {
-     "name": 'string', 
-     "description": 'string', 
-     "contact": {
-          "address": 'string',
-          "phone": 'string',
-          "location": 'string',
-          "mail": 'string',
-          "website": 'string',
-     },
-
-     "menu": { 
-          "dish1": {
-          "name": 'string',
-          "price": 0.99, 
+          restaurant1:{
+          "id": 1,
+          "name": 'string', 
           "description": 'string', 
-          "picture": 10 
-           },
-          "dish2": {
-          "name": 'string',
-          "price": 0.99, 
+          "picture": 1 // restaurant picture id
+          },
+          restaurant2:{
+          "id": 1,
+          "name": 'string', 
           "description": 'string', 
-          "picture": 11 // dish picture_id
-          }
-     },
-     "picture": 1 // restaurant picture_id
+          "picture": 1 // restaurant picture id
+          },
  }
 ```
 
@@ -229,8 +131,203 @@ GET /restaurant/delete/{id}
 ответ
 ```json5
 {
-     "status": 'ok', 
+     "status": 'ok'
+ }
+```
+
+**Добавление меню ресторана**
+
+POST /menu/add
+
+```json5
+{
+     "menu": { 
+          "dish1": {
+          "name": 'string',
+          "price": 0.99, 
+          "description": 'string', 
+          "picture": 10 
+           },
+          "dish2": {
+          "name": 'string',
+          "price": 0.99, 
+          "description": 'string', 
+          "picture": 11 // dish picture id
+          }
+     }
+ }
+```
+ответ
+```json5
+{
+     "status": 'ok' 
           
+ }
+```
+
+**Получение меню ресторана**
+
+GET /menu/get{restaurantId}
+
+ответ
+```json5
+{
+          "dish1": {
+          "name": 'string',
+          "price": 0.99, 
+          "description": 'string', 
+          "picture": 10 
+           },
+          "dish2": {
+          "name": 'string',
+          "price": 0.99, 
+          "description": 'string', 
+          "picture": 11 // dish picture id
+          }
+}
+```
+```json5
+{
+     "status": 'ok' 
+          
+ }
+```
+
+**Добавление блюда**
+
+POST /dish/add
+```json5
+{
+      "dish1": {
+      "name": 'string',
+      "price": 0.99, 
+      "description": 'string', 
+      "picture": 10 
+       }
+ }
+```
+ответ
+```json5
+{
+      "status": 'ok'     
+ }
+```
+
+**Обновление блюда**
+
+POST /dish/update
+```json5
+{
+      "dish1": {
+      "name": 'string',
+      "price": 0.99, 
+      "description": 'string', 
+      "picture": 10 
+       }
+ }
+```
+ответ
+```json5
+{
+      "status": 'ok'     
+ }
+```
+
+**Удаление блюда**
+
+GET /dish/delete
+```json5
+{
+      "dish1": {
+      "name": 'string',
+      "price": 0.99, 
+      "description": 'string', 
+      "picture": 10 
+       }
+ }
+```
+ответ
+```json5
+{
+      "status": 'ok'     
+ }
+```
+
+**Добавление контактов ресторана**
+
+POST /contact/add
+```json5
+{
+      "contact": {
+      "address": 'string',
+      "phone": 'string',
+      "location": 'string',
+      "mail": 'string',
+      "website": 'string',
+      "restaurantId": 1
+      }
+ }
+```
+ответ
+```json5
+{
+      "status": 'ok'     
+ }
+```
+
+**Получение контактов ресторана**
+
+GET /contact/get{restaurantId}
+
+ответ
+```json5
+{
+      "contact": {
+      "address": 'string',
+      "phone": 'string',
+      "location": 'string',
+      "mail": 'string',
+      "website": 'string',
+      "restaurantId": 1
+      }
+ }
+```
+```json5
+{
+      "status": 'ok'     
+ }
+```
+
+**Обновление контактов ресторана**
+
+POST /contact/update
+```json5
+{
+      "contact": {
+      "address": 'string',
+      "phone": 'string',
+      "location": 'string',
+      "mail": 'string',
+      "website": 'string',
+      "restaurantId": 1
+      }
+ }
+```
+ответ
+```json5
+{
+      "status": 'ok'     
+ }
+```
+
+**Удаление контактов ресторана**
+
+GET /contact/delete{restaurantId}
+
+ответ
+```json5
+{
+      "status": 'ok'     
  }
 ```
 

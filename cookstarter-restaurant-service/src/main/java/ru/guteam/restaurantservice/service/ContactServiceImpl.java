@@ -30,9 +30,9 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     @Transactional
-    public void updateContact(Long restaurantId, ContactDTO contact) {
-        Contact oldContact = contactRepo.findByRestaurantId(restaurantId)
-                .orElseThrow(() -> new ContactNotFoundException(restaurantId));
+    public void updateContact(ContactDTO contact) {
+        Contact oldContact = contactRepo.findByRestaurantId(contact.getRestaurantId())
+                .orElseThrow(() -> new ContactNotFoundException(contact.getRestaurantId()));
         Contact newContact = mapper.mapToContact(contact);
         newContact.setId(oldContact.getId());
         contactRepo.save(newContact);

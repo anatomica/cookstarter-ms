@@ -4,9 +4,9 @@ import ru.guteam.restaurantservice.dto.DishDTO;
 import ru.guteam.restaurantservice.model.Dish;
 
 public interface DishService {
-    Long saveDish(DishDTO dish);
+    void saveDish(DishDTO dish);
 
-    Long updateDish(DishDTO dish);
+    void updateDish(DishDTO dish);
 
-    Long deleteDish(DishDTO dish);
+    void deleteDish(DishDTO dish);
 }
