@@ -17,6 +17,6 @@ public class TokenRequest {
     @ApiModelProperty(notes = "Unique username", example = "1000", required = true, position = 1)
     private String username;
     @NotNull
-    @ApiModelProperty(notes = "User's password", example = "1000", required = true, position = 0)
+    @ApiModelProperty(notes = "User's password", example = "1000", required = true, position = 2)
     private String password;
 }

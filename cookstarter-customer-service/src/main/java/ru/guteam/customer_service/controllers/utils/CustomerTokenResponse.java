@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(description = "Class representing a JWT token in the application.")
-public class TokenResponse {
+public class CustomerTokenResponse {
     @NotNull
     @ApiModelProperty(notes = "Unique token", example = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMDAiLCJyb2xlIjpbIkNVU1RPTUVSIl0sImV4cCI6MTYwMzM4MDUxNywiaWF0IjoxNjAzMzc2OTE3fQ.FCNPs5fKYSqVihxLyFzeriDm7MfaSEynHNpz0AVXN9s", required = true)
     private String token;
