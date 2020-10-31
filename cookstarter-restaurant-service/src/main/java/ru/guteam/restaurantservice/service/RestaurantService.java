@@ -1,15 +1,21 @@
 package ru.guteam.restaurantservice.service;
 
+import ru.guteam.restaurantservice.dto.RestaurantDTO;
 import ru.guteam.restaurantservice.model.Restaurant;
 
 import java.util.List;
 
 public interface RestaurantService {
     Restaurant getRestaurant(Long id);
-    Long saveRestaurant(Restaurant restaurant);
-    List<Restaurant> getRestaurantsByName(String name);
-    List<Restaurant> getRestaurantsByAddress(String address);
+
+    Long saveRestaurant(RestaurantDTO restaurant);
+
+    List<RestaurantDTO> getRestaurantsByName(String name);
+
+    List<RestaurantDTO> getRestaurantsByAddress(String address);
+
     //some method for many restaurants
-    void updateRestaurant(Restaurant restaurant);
+    void updateRestaurant(RestaurantDTO restaurant);
+
     void deleteRestaurant(Long id);
 }
