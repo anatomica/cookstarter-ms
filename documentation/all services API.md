@@ -125,10 +125,21 @@ POST /restaurant/add
      "picture": 1 // restaurant picture_id
  }
 ```
+**Добавление карточки ресторана**
+
+POST /restaurant/add
+```json5
+{
+     "name": 'string', 
+     "description": 'string', 
+     "picture": 1 // restaurant picture id, no requirement
+ }
+```
 ответ
 ```json5
 {
-    "status": "OK",
+  "id": 1,  
+  "status": "OK",
 }
 ```
 
@@ -172,9 +183,9 @@ POST /restaurant/update
 ```
 
 
-**Получение карточки ресторана**
+**Получение ресторана или списка по имени(его части)**
 
-GET /restaurant/get/{id}
+GET /restaurant/getByName
 
 ответ
 ```json5
@@ -206,6 +217,10 @@ GET /restaurant/get/{id}
      "picture": 1 // restaurant picture_id
  }
 ```
+
+**Получение ресторана или списка по адресу(его части)**
+
+Не готово
 
 **Удаление карточки ресторана**
 
