@@ -8,7 +8,6 @@ import ru.guteam.bot.sender.CustomerSender;
 @Service
 public class CustomerService {
     private CustomerSender customerSender;
-
     private RestClient restClient;
 
     @Autowired

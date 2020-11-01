@@ -10,7 +10,6 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
-@ToString
 @Table(name = "users")
 public class User {
 
@@ -22,7 +21,7 @@ public class User {
     @Column(name = "user_type")
     private UsersTypeEnum userType;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private Customer customer;
 

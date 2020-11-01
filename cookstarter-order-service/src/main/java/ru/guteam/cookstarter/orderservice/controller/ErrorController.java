@@ -2,19 +2,21 @@ package ru.guteam.cookstarter.orderservice.controller;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.MismatchedInputException;
+import io.jsonwebtoken.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.context.request.WebRequest;
 import ru.guteam.cookstarter.api.dto.StatusResponse;
 import ru.guteam.cookstarter.orderservice.exception.OrderProcessingException;
 import ru.guteam.cookstarter.orderservice.exception.TokenNotActiveException;
 
 import java.net.ConnectException;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
+import static org.springframework.http.HttpStatus.*;
+import static ru.guteam.cookstarter.api.dto.RequestMessageHeaders.JWT_TOKEN_HEADER;
 import static ru.guteam.cookstarter.orderservice.controller.util.StatusResponseBuilder.error;
 
 @Slf4j
@@ -39,6 +41,13 @@ public class ErrorController {
         return error(INTERNAL_SERVER_ERROR, "Нет соединения");
     }
 
+    @ExceptionHandler(JwtException.class)
+    public ResponseEntity<StatusResponse> tokenError(WebRequest request, JwtException e) {
+        log.error("Ошибка при проверке токена '{}':\n{}", request.getHeader(JWT_TOKEN_HEADER), e.getMessage());
+        return error(UNAUTHORIZED, "Ошибка при проверке токена");
+    }
+
+    // любые другие незапланированные ошибки
     @ExceptionHandler
     public ResponseEntity<StatusResponse> exception(Exception e) {
         log.error("Неизвестная ошибка", e);

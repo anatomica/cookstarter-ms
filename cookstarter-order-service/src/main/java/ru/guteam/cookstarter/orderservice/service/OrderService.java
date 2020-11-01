@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.guteam.cookstarter.api.dto.orderservice.OrderDto;
+import ru.guteam.cookstarter.orderservice.aspect.annotation.CheckIdIsNotNull;
 import ru.guteam.cookstarter.orderservice.exception.OrderProcessingException;
 import ru.guteam.cookstarter.orderservice.model.Order;
 import ru.guteam.cookstarter.orderservice.model.OrderItem;
@@ -45,10 +46,10 @@ public class OrderService {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)));
     }
 
+    @CheckIdIsNotNull
     @Transactional
     public void update(OrderDto orderRequest) {
         Long id = orderRequest.getId();
-        checkIdIsNull(id);
         Order order = getOrderByIdOrThrowException(id);
         Order orderNew = toOrder(orderRequest);
         order.setDishes(joinDishMaps(order.getDishes(), orderNew.getDishes()));
@@ -84,15 +85,8 @@ public class OrderService {
         return mapOld;
     }
 
-
-    private void checkIdIsNull(Long id) {
-        if (id == null) {
-            throw new OrderProcessingException("Не указан id");
-        }
-    }
-
+    @CheckIdIsNotNull
     public OrderDto getById(Long id) {
-        checkIdIsNull(id);
         return toDto(getOrderByIdOrThrowException(id));
     }
 
@@ -101,16 +95,16 @@ public class OrderService {
                 .orElseThrow(() -> new OrderProcessingException("Не найден заказ id = " + id));
     }
 
+    @CheckIdIsNotNull
     @Transactional
     public void deleteOrder(Long id) {
-        checkIdIsNull(id);
         getOrderByIdOrThrowException(id);
         orderRepository.deleteById(id);
     }
 
+    @CheckIdIsNotNull
     @Transactional
     public void deleteItem(Long id) {
-        checkIdIsNull(id);
         getItemByIdOrThrowException(id);
         orderItemRepository.deleteById(id);
     }
@@ -120,15 +114,15 @@ public class OrderService {
                 .orElseThrow(() -> new OrderProcessingException("Не найдено в заказах блюда id = " + id));
     }
 
+    @CheckIdIsNotNull
     public List<OrderDto> getAllByCustomerId(Long id) {
-        checkIdIsNull(id);
         return orderRepository.findAllByCustomerId(id).stream()
                 .map(OrderMapping::toDto)
                 .collect(Collectors.toList());
     }
 
+    @CheckIdIsNotNull
     public List<OrderDto> getAllByRestaurantId(Long id) {
-        checkIdIsNull(id);
         return orderRepository.findAllByRestaurantId(id).stream()
                 .map(OrderMapping::toDto)
                 .collect(Collectors.toList());

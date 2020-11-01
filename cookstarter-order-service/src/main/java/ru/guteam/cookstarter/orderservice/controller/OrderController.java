@@ -20,6 +20,7 @@ public class OrderController {
 
     private final OrderService orderService;
 
+    @CrossOrigin
     @PostMapping("/add")
     public ResponseEntity<StatusResponse> addOrder(@Valid @RequestBody OrderDto orderRequest,
                                                    @RequestHeader(JWT_TOKEN_HEADER) String token) {
@@ -27,6 +28,7 @@ public class OrderController {
         return StatusResponseBuilder.okWithId(String.valueOf(id));
     }
 
+    @CrossOrigin
     @PostMapping("/update")
     public ResponseEntity<StatusResponse> updateOrder(@Valid @RequestBody OrderDto orderRequest,
                                                       @RequestHeader(JWT_TOKEN_HEADER) String token) {
@@ -34,6 +36,7 @@ public class OrderController {
         return StatusResponseBuilder.ok();
     }
 
+    @CrossOrigin
     @GetMapping("/delete/{id}")
     public ResponseEntity<StatusResponse> deleteOrder(@PathVariable("id") Long id,
                                                       @RequestHeader(JWT_TOKEN_HEADER) String token) {
@@ -41,6 +44,7 @@ public class OrderController {
         return StatusResponseBuilder.ok();
     }
 
+    @CrossOrigin
     @GetMapping("/delete/item/{id}")
     public ResponseEntity<StatusResponse> deleteItem(@PathVariable("id") Long id,
                                                      @RequestHeader(JWT_TOKEN_HEADER) String token) {
@@ -48,18 +52,21 @@ public class OrderController {
         return StatusResponseBuilder.ok();
     }
 
+    @CrossOrigin
     @GetMapping("/get/{id}")
     public OrderDto getById(@PathVariable("id") Long id,
                             @RequestHeader(JWT_TOKEN_HEADER) String token) {
         return orderService.getById(id);
     }
 
+    @CrossOrigin
     @GetMapping("/get/customer/{id}")
     public List<OrderDto> getAllByCustomerId(@PathVariable("id") Long id,
                                              @RequestHeader(JWT_TOKEN_HEADER) String token) {
         return orderService.getAllByCustomerId(id);
     }
 
+    @CrossOrigin
     @GetMapping("/get/restaurant/{id}")
     public List<OrderDto> getAllByRestaurantId(@PathVariable("id") Long id,
                                                @RequestHeader(JWT_TOKEN_HEADER) String token) {

@@ -4,6 +4,7 @@ import ru.guteam.customer_service.entities.utils.enums.UsersTypeEnum;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
+import javax.validation.constraints.NotNull;
 import java.util.stream.Stream;
 
 @Converter(autoApply = true)
@@ -18,7 +19,7 @@ public class UsersTypesConvertor implements AttributeConverter<UsersTypeEnum, St
     }
 
     @Override
-    public UsersTypeEnum convertToEntityAttribute(String code) {
+    public UsersTypeEnum convertToEntityAttribute(@NotNull String code) {
         if (code == null) {
             return null;
         }

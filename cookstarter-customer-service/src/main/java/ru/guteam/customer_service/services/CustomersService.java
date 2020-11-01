@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.guteam.customer_service.entities.Customer;
 import ru.guteam.customer_service.entities.User;
 import ru.guteam.customer_service.entities.utils.SystemCustomer;
-import ru.guteam.customer_service.exceptions.ResourceNotFoundException;
 import ru.guteam.customer_service.repositories.CustomersRepository;
 
 @Service
@@ -25,7 +24,7 @@ public class CustomersService {
 
     @Transactional
     public Customer saveBySystemCustomer(SystemCustomer systemCustomer) {
-        Customer customer = new Customer();
+        final Customer customer = new Customer();
         customer.setFirstName(systemCustomer.getFirstName());
         customer.setLastName(systemCustomer.getLastName());
         customer.setEmail(systemCustomer.getEmail());
@@ -33,5 +32,9 @@ public class CustomersService {
         user.setCustomer(customer);
         customer.setUser(user);
         return customersRepository.save(customer);
+    }
+
+    public boolean existsByEmail(String email) {
+        return customersRepository.existsByEmail(email);
     }
 }

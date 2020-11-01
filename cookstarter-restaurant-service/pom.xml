@@ -3,15 +3,13 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.3.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<artifactId>cookstarter</artifactId>
+		<groupId>ru.guteam</groupId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-	<groupId>ru.guteam.restaurant_service</groupId>
+
 	<artifactId>restaurant-service</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>restaurant-service</name>
+	<name>cookstarter-restaurant-service</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
@@ -35,6 +33,23 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+	</dependencies>
 	</dependencies>
 
 	<build>
