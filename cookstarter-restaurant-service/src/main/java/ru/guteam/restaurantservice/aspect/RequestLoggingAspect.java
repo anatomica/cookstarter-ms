@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RequestLoggingAspect {
 
-    @Before("execution(*ru.guteam.restaurantservice.controller * ())")
-    public void checkToken(JoinPoint joinPoint) {
+    @Before("execution(* ru.guteam.restaurantservice.controller.*.* (..))")
+    public void setLog(JoinPoint joinPoint) {
         log.info("Method invoking - " + joinPoint.getSignature().getName());
     }
 }
