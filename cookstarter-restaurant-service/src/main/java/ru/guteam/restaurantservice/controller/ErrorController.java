@@ -49,7 +49,7 @@ public class ErrorController {
     @ExceptionHandler(NotFountException.class)
     public ResponseEntity notFound(Exception e) {
         log.error(e.getMessage(), e);
-        return error(e.getMessage(), NO_CONTENT);
+        return error(e.getMessage(), NOT_FOUND);
     }
 
     @ExceptionHandler
