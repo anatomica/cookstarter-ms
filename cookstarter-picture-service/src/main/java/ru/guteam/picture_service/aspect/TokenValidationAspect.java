@@ -19,7 +19,7 @@ public class TokenValidationAspect {
     @Before("execution(* ru.guteam.picture_service.controller.*.* (*, java.lang.String, ..))")
     public void tokenCheck(JoinPoint joinPoint) {
         String token = (String) joinPoint.getArgs()[1];
-        log.info("Проверка токена");
+        log.info("Проверка токена " + token);
         jwtValidationService.checkToken(token);
     }
 }
