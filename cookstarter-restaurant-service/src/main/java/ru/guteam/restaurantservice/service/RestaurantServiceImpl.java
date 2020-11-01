@@ -36,7 +36,7 @@ public class RestaurantServiceImpl implements RestaurantService {
     @Override
     @Transactional
     public List<Restaurant> getRestaurantsByName(String name) {
-        List<Restaurant> restaurants = restaurantRepo.findByNameLike(name)
+        List<Restaurant> restaurants = restaurantRepo.findByNameContains(name)
                 .orElseThrow(() -> new RestaurantNotFoundException(name));
         return restaurants;
     }

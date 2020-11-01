@@ -67,17 +67,15 @@ POST /auth
 POST /restaurant/add
 ```json5
 {
-     "id": 1, 
-     "name": 'string', 
-     "description": 'string', 
-     "picture": 1 // restaurant picture id, no requirement
- }
+  "name": "first restaurant",//обязательно
+  "description": "this is Russian restaurant"//обязательно
+}
 ```
 ответ
 ```json5
 {
   "id": 1,  
-  "status": "OK",
+  "status": "OK"
 }
 ```
 
@@ -86,10 +84,10 @@ POST /restaurant/add
 POST /restaurant/update
 ```json5
 {
-     "id": 1,
-     "name": 'string', 
-     "description": 'string', 
-     "picture": 1 // restaurant picture id
+     "id": 1,//обязательно
+     "name": 'string', //обязательно
+     "description": 'string', //обязательно
+     "picture": 1 // restaurant picture id //обязательно
  }
 ```
 ответ
@@ -105,20 +103,20 @@ GET /restaurant/getByName{name}
 
 ответ
 ```json5
-{
-          restaurant1:{
+[
+          {
           "id": 1,
           "name": 'string', 
           "description": 'string', 
           "picture": 1 // restaurant picture id
           },
-          restaurant2:{
-          "id": 1,
+          {
+          "id": 2,
           "name": 'string', 
           "description": 'string', 
-          "picture": 1 // restaurant picture id
+          "picture": 2 // restaurant picture id
           },
- }
+ ]
 ```
 
 **Получение всех ресторанов**
@@ -126,20 +124,20 @@ GET /restaurant/getAll
 
 ответ
 ```json5
-{
-          restaurant1:{
+[
+          {
           "id": 1,
           "name": 'string', 
           "description": 'string', 
           "picture": 1 // restaurant picture id
           },
-          restaurant2:{
-          "id": 1,
+          {
+          "id": 2,
           "name": 'string', 
           "description": 'string', 
-          "picture": 1 // restaurant picture id
+          "picture": 2 // restaurant picture id
           },
- }
+ ]
 ```
 
 **Удаление карточки ресторана**
@@ -159,21 +157,23 @@ POST /menu/add
 
 ```json5
 {
-     "menu": { 
-          "dish1": {
-          "name": 'string',
-          "price": 0.99, 
-          "description": 'string', 
-          "picture": 10 
-           },
-          "dish2": {
-          "name": 'string',
-          "price": 0.99, 
-          "description": 'string', 
-          "picture": 11 // dish picture id
-          }
-     }
- }
+  "dishes": [
+    {
+    "name": "borsch",//обязательно
+    "price": 0.99,//обязательно
+    "description": "soup",//обязательно
+    "pictureId": 124,
+    "restaurantId": 1 //обязательно
+  },
+  {
+    "name": "pel'meny",
+    "price": 0.98,
+    "description": "vkusnata",
+    "pictureId": 123,
+    "restaurantId": 1
+  }
+]
+}
 ```
 ответ
 ```json5
@@ -189,20 +189,20 @@ GET /menu/get{restaurantId}
 
 ответ
 ```json5
-{
-          "dish1": {
+[
+          {
           "name": 'string',
           "price": 0.99, 
           "description": 'string', 
           "picture": 10 
            },
-          "dish2": {
+          {
           "name": 'string',
           "price": 0.99, 
           "description": 'string', 
           "picture": 11 // dish picture id
           }
-}
+]
 ```
 ```json5
 {
@@ -216,13 +216,12 @@ GET /menu/get{restaurantId}
 POST /dish/add
 ```json5
 {
-      "dish1": {
-      "name": 'string',
-      "price": 0.99, 
-      "description": 'string', 
-      "picture": 10 
-       }
- }
+ "name": "string",//обязательно
+ "price": 0.99,//обязательно
+ "description": "string",//обязательно
+ "pictureId": 123,
+  "restaurantId": 1 //обязательно
+}
 ```
 ответ
 ```json5
@@ -236,13 +235,12 @@ POST /dish/add
 POST /dish/update
 ```json5
 {
-      "dish1": {
-      "name": 'string',
-      "price": 0.99, 
-      "description": 'string', 
-      "picture": 10 
-       }
- }
+  "name": "string",//обязательно
+  "price": 1000,//обязательно
+  "description": "string",//обязательно
+  "pictureId": 8,
+  "restaurantId": 1 //обязательно
+}
 ```
 ответ
 ```json5
@@ -256,13 +254,12 @@ POST /dish/update
 GET /dish/delete
 ```json5
 {
-      "dish1": {
-      "name": 'string',
-      "price": 0.99, 
-      "description": 'string', 
-      "picture": 10 
-       }
- }
+  "name": "borsch",//обязательно
+  "price": 1000,//обязательно
+  "description": "super soup",//обязательно
+  "pictureId": 8,
+  "restaurantId": 1 //обязательно
+}
 ```
 ответ
 ```json5
@@ -276,15 +273,13 @@ GET /dish/delete
 POST /contact/add
 ```json5
 {
-      "contact": {
-      "address": 'string',
-      "phone": 'string',
-      "location": 'string',
-      "mail": 'string',
-      "website": 'string',
-      "restaurantId": 1
-      }
- }
+"address": "string",//обязательно
+"phone": "string",//обязательно
+"location": "string",//обязательно
+"mail": "string",//обязательно
+"website": "string",//обязательно
+"restaurantId": 1 //обязательно
+}
 ```
 ответ
 ```json5
@@ -300,14 +295,12 @@ GET /contact/get{restaurantId}
 ответ
 ```json5
 {
-      "contact": {
       "address": 'string',
       "phone": 'string',
       "location": 'string',
       "mail": 'string',
       "website": 'string',
       "restaurantId": 1
-      }
  }
 ```
 ```json5
@@ -321,15 +314,13 @@ GET /contact/get{restaurantId}
 POST /contact/update
 ```json5
 {
-      "contact": {
-      "address": 'string',
-      "phone": 'string',
-      "location": 'string',
-      "mail": 'string',
-      "website": 'string',
-      "restaurantId": 1
-      }
- }
+  "address": "string",//обязательно
+  "phone": "string",//обязательно
+  "location": "string",//обязательно
+  "mail": "string",//обязательно
+  "website": "string",//обязательно
+  "restaurantId": 1 //обязательно
+}
 ```
 ответ
 ```json5
