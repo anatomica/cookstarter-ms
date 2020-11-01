@@ -46,7 +46,7 @@ public class ErrorController {
     @ExceptionHandler(JwtException.class)
     public ResponseEntity<StatusResponse> tokenError(WebRequest request, JwtException e) {
         log.error("Ошибка при проверке токена '{}':\n{}", request.getHeader(JWT_TOKEN_HEADER), e.getMessage());
-        return error(UNAUTHORIZED, "Ошибка при проверке токена");
+        return error(BAD_REQUEST, "Ошибка при проверке токена");
     }
 
     @ExceptionHandler(AuthorizationException.class)

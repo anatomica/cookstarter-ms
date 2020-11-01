@@ -30,7 +30,6 @@ public class OrderDto {
 
     private OrderStatus status;
 
-//    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss.SSSZ")
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     private OffsetDateTime dateCreated;
 
