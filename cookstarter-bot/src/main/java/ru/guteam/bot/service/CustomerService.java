@@ -17,7 +17,7 @@ public class CustomerService {
     }
 
     public String auth(String username, String password) {
-
+        return null;
     }
 
     public void registration(String username, String password1, String password2,
