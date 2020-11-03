@@ -18,6 +18,6 @@ public class RestClient {
         AuthRequest authRequest = new AuthRequest(username, password);
 
         return restTemplate.postForObject("http://cookstarter-customer-service.herokuapp.com/auth",
-                authRequest, String.class);
+                                              authRequest, String.class);
     }
 }
