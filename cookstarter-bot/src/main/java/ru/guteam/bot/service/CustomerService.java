@@ -16,4 +16,12 @@ public class CustomerService {
         this.restClient = restClient;
     }
 
+    public String auth(String username, String password) {
+
+    }
+
+    public void registration(String username, String password1, String password2,
+                             String firstname, String lastname, String email) {
+
+    }
 }
