@@ -97,9 +97,25 @@ POST /restaurant/update
 }
 ```
 
+**Получение ресторана по id**
+
+GET /restaurant/get/{id}
+
+ответ
+```json5
+{
+          
+          "id": 1,
+          "name": 'string', 
+          "description": 'string', 
+          "picture": 1 // restaurant picture id
+              
+ }
+```
+
 **Получение ресторана или списка по имени(его части)**
 
-GET /restaurant/getByName{name}
+GET /restaurant/getByName/{name}
 
 ответ
 ```json5

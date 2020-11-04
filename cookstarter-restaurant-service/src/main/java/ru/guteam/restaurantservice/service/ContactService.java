@@ -1,7 +1,6 @@
 package ru.guteam.restaurantservice.service;
 
 import ru.guteam.restaurantservice.dto.ContactDTO;
-import ru.guteam.restaurantservice.model.Contact;
 
 public interface ContactService {
     void saveContact(ContactDTO contact);

@@ -29,7 +29,7 @@ public class RestaurantController {
     }
 
     @CrossOrigin
-    @GetMapping("/get/{restaurantId}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Restaurant> getRestaurantById(@RequestHeader(JWT_HEADER) String token,
                                                         @PathVariable Long id) {
         Restaurant restaurant = restaurantService.getRestaurant(id);
