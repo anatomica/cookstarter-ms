@@ -8,6 +8,8 @@ import java.util.List;
 public interface MenuService {
     void createMenu(MenuDTO menu);
 
-    List<Dish> getMenu(Long restaurant_id);
+    List<Dish> getMenu(Long restaurantId);
+
+    void deleteMenuByRestaurantId(Long restaurantId);
 
 }

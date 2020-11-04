@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.guteam.restaurantservice.dto.RestaurantDTO;
 import ru.guteam.restaurantservice.model.Restaurant;
+import ru.guteam.restaurantservice.service.ContactService;
+import ru.guteam.restaurantservice.service.MenuService;
 import ru.guteam.restaurantservice.service.RestaurantService;
 
 import java.util.List;
@@ -19,6 +21,8 @@ import static ru.guteam.restaurantservice.util.RequestHeaders.JWT_HEADER;
 @RequiredArgsConstructor
 public class RestaurantController {
     private final RestaurantService restaurantService;
+    private final ContactService contactService;
+    private final MenuService menuService;
 
     @CrossOrigin
     @PostMapping("/add")
@@ -64,6 +68,8 @@ public class RestaurantController {
     public ResponseEntity<Long> deleteRestaurant(@RequestHeader(JWT_HEADER) String token,
                                                  @PathVariable Long id) {
         restaurantService.deleteRestaurant(id);
+        contactService.deleteContactByRestaurantId(id);
+        menuService.deleteMenuByRestaurantId(id);
         return idAndStatus(id, OK);
     }
 
