@@ -1,4 +1,4 @@
-package ru.guteam.restaurantservice.service;
+package ru.guteam.restaurantservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,6 +7,7 @@ import ru.guteam.restaurantservice.dto.ContactDTO;
 import ru.guteam.restaurantservice.exception.ContactNotFoundException;
 import ru.guteam.restaurantservice.model.Contact;
 import ru.guteam.restaurantservice.repo.ContactRepo;
+import ru.guteam.restaurantservice.service.ContactService;
 import ru.guteam.restaurantservice.util.Mapper;
 
 @Service

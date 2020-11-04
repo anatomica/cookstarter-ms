@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import ru.guteam.restaurantservice.dto.ContactDTO;
 import ru.guteam.restaurantservice.model.Contact;
+import ru.guteam.restaurantservice.model.Restaurant;
 
 import java.util.List;
 
@@ -17,6 +18,10 @@ public class ResponseBuilder {
 
     public ResponseEntity<List> listAndStatus(List list, HttpStatus status) {
         return ResponseEntity.status(status).body(list);
+    }
+
+    public ResponseEntity<Restaurant> restaurantAndStatus(Restaurant restaurant, HttpStatus status) {
+        return ResponseEntity.status(status).body(restaurant);
     }
 
     public ResponseEntity<ContactDTO> contactAndStatus(ContactDTO contact, HttpStatus status) {
