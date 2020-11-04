@@ -1,14 +1,14 @@
 
 ### restaurant
 
-POST http://localhost:8081/restaurant/add
+POST https://cookstarter-restaurant-service.herokuapp.com/restaurant/add
 Accept: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjM0NTAwMDcwLCJpYXQiOjE2MDI5NjQwNzB9.1HLjqDbZz5VN6B268zQA5CVCQ0maYmyaWcY6YOMoMow
 Content-Type: application/json
 
 {
-  "name": "first restaurant",
-  "description": "this is super restaurant"
+  "name": "some restaurant",
+  "description": "this is just restaurant"
 }
 
 ###
@@ -53,10 +53,10 @@ Content-Type: application/json
 {
   "dishes": [
     {
-      "name": "borsch",
-      "price": 0.99,
-      "description": "soup",
-      "pictureId": 124,
+      "name": "shaurma",
+      "price": 0.50,
+      "description": "eda",
+      "pictureId": 321,
       "restaurantId": 1
     },
     {
