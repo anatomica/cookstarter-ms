@@ -28,4 +28,10 @@ public class MenuServiceImpl implements MenuService {
         return dishRepo.findAllByRestaurantId(restaurantId)
                 .orElseThrow(() -> new GetMenuException(restaurantId));
     }
+
+    @Override
+    @Transactional
+    public void deleteMenuByRestaurantId(Long restaurantId) {
+        dishRepo.deleteAllByRestaurantId(restaurantId);
+    }
 }
