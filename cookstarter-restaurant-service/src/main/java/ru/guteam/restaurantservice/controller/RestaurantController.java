@@ -29,6 +29,14 @@ public class RestaurantController {
     }
 
     @CrossOrigin
+    @GetMapping("/get/{restaurantId}")
+    public ResponseEntity<Restaurant> getRestaurantById(@RequestHeader(JWT_HEADER) String token,
+                                                        @PathVariable Long id) {
+        Restaurant restaurant = restaurantService.getRestaurant(id);
+        return restaurantAndStatus(restaurant, OK);
+    }
+
+    @CrossOrigin
     @GetMapping("/getByName/{name}")
     public ResponseEntity<List> getRestaurantsByName(@RequestHeader(JWT_HEADER) String token,
                                                      @PathVariable String name) {
