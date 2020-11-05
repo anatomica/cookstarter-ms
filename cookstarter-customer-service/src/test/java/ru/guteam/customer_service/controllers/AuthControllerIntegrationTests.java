@@ -33,7 +33,6 @@ public class AuthControllerIntegrationTests {
         assert response.getBody() != null;
         assertThat(customerResponse, is(instanceOf(CustomerTokenResponse.class)));
         assertThat(customerResponse.getToken(), is(notNullValue()));
-        assertThat(customerResponse.getToken(), is(instanceOf(String.class)));
     }
 
     @Test
@@ -46,8 +45,17 @@ public class AuthControllerIntegrationTests {
         assert response.getBody() != null;
         assertThat(response.getBody(), is(instanceOf(RestaurantTokenResponse.class)));
         assertThat(response.getBody().getToken(), is(notNullValue()));
-        assertThat(response.getBody().getToken(), is(instanceOf(String.class)));
         assertThat(response.getBody().getId(), is(notNullValue()));
-        assertThat(response.getBody().getId(), is(instanceOf(Long.class)));
+    }
+
+    @Test
+    public void whenUserNotAuthenticated_thenStatus401() {
+        TokenRequest request = new TokenRequest();
+        request.setUsername("100");
+        request.setPassword("200");
+        ResponseEntity<String> response = restTemplate.postForEntity("/auth", new HttpEntity<>(request), String.class);
+        assertThat(response.getStatusCode(), is(HttpStatus.UNAUTHORIZED));
+        assert response.getBody() != null;
+        assertThat(response.getBody(), is(notNullValue()));
     }
 }
