@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="col-md-12"><br>
+        <form method="post" id="contactForm">
+            <div class="form-group">
+                <h4 style="color: #24305E">Добавление контактов</h4>
+                <hr style="color: #24305E; background-color: #24305E"/>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="RestaurantAddress">Адрес:</label>
+                        <input type="text" class="form-control" placeholder="Адрес ресторана"
+                               id="RestaurantAddress" placeholder="Название" ng-model="contact.address">
+                    </div>
+                    <div class="col">
+                        <label for="restaurantPhone">Телефон:</label>
+                        <input type="text" class="form-control" id="restaurantPhone"
+                               placeholder="Номер телефона" ng-model="contact.phone">
+                    </div>
+                </div><br>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="RestaurantEmail">Email:</label>
+                        <input type="email" class="form-control" placeholder="name@example.com"
+                               id="RestaurantEmail"  ng-model="contact.mail">
+                    </div>
+                    <div class="col">
+                        <label for="restaurantWebsite">Веб-сайт:</label>
+                        <input type="text" class="form-control" id="restaurantWebsite"
+                               placeholder="example.com" ng-model="contact.website">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col">
+                        <label for="RestaurantLocation">Location:</label>
+                        <input type="email" class="form-control" placeholder=""
+                               id="RestaurantLocation"  ng-model="contact.location">
+                    </div>
+                </div>
+            </div>
+            <a class="btn text-white" style="background-color: #374785"
+               ng-click="addContact(contact)"  form="contactForm"
+               href="#">Сохранить</a>
+        </form>
+        <br>
+    </div>
+</div>
