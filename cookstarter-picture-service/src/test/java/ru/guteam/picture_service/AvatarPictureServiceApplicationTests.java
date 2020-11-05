@@ -31,6 +31,10 @@ import static ru.guteam.cookstarter.api.dto.RequestMessageHeaders.JWT_TOKEN_HEAD
 @SpringBootTest
 @AutoConfigureMockMvc
 public class AvatarPictureServiceApplicationTests {
+    private static final String GET_PICTURE_URL = "/picture/avatar/get/{pictureId}";
+    private static final String ADD_PICTUTE_URL = "/picture/avatar/api/add";
+    private static final String UPDATE_PICTURE_URL = "/picture/avatar/api/update/{pictureId}";
+    private static final String DELETE_PICTURE_URL = "/picture/avatar/api/delete/{pictureId}";
 
     @Autowired
     private AvatarPictureService avatarPictureService;
@@ -38,6 +42,9 @@ public class AvatarPictureServiceApplicationTests {
     private MockMvc mockMvc;
     @Autowired
     private AvatarPictureRepository avatarPictureRepository;
+
+    @Value("${app.auth-type}")
+    private String authType;
 
     @Value("${app.path-directory-test}")
     private String pathPic;
@@ -48,7 +55,7 @@ public class AvatarPictureServiceApplicationTests {
 
     @PostConstruct
     public void setFile() throws IOException {
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjM0NTAwMDcwLCJpYXQiOjE2MDI5NjQwNzB9.1HLjqDbZz5VN6B268zQA5CVCQ0maYmyaWcY6YOMoMow";
+        token = authType + " eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjM0NTAwMDcwLCJpYXQiOjE2MDI5NjQwNzB9.1HLjqDbZz5VN6B268zQA5CVCQ0maYmyaWcY6YOMoMow";
         Path testPic = Paths.get(pathPic,"5mm.jpg");
         file = new MockMultipartFile("file","5mm.jpg","image", Files.readAllBytes(testPic.toAbsolutePath()));
     }
@@ -67,7 +74,7 @@ public class AvatarPictureServiceApplicationTests {
     public void getPicture() throws Exception {
         id = avatarPictureService.insert(file);
         mockMvc.perform(
-                get("/picture/avatar/get/{pictureId}",id)
+                get(GET_PICTURE_URL,id)
                         .param(JWT_TOKEN_HEADER, token))
                 .andExpect(status().isOk());
     }
@@ -75,7 +82,7 @@ public class AvatarPictureServiceApplicationTests {
     @Test
     public void addPicture() throws Exception {
         mockMvc.perform(
-                multipart("/picture/avatar/api/add")
+                multipart(ADD_PICTUTE_URL)
                         .file((MockMultipartFile) file)
                         .header(JWT_TOKEN_HEADER, token))
                 .andExpect(status().isOk());
@@ -85,7 +92,7 @@ public class AvatarPictureServiceApplicationTests {
     public void updatePicture() throws Exception {
         id = avatarPictureService.insert(file);
         mockMvc.perform(
-                multipart("/picture/avatar/api/update/{pictureId}", id)
+                multipart(UPDATE_PICTURE_URL, id)
                         .file((MockMultipartFile) file)
                         .header(JWT_TOKEN_HEADER, token))
                 .andExpect(status().isOk());
@@ -95,7 +102,7 @@ public class AvatarPictureServiceApplicationTests {
     public void deletePicture() throws Exception {
         id = avatarPictureService.insert(file);
         mockMvc.perform(
-                get("/picture/avatar/api/delete/{pictureId}",id)
+                get(DELETE_PICTURE_URL,id)
                         .header(JWT_TOKEN_HEADER, token))
                 .andExpect(status().isOk());
     }

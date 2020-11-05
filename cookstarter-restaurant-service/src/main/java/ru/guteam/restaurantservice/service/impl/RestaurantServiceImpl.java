@@ -1,14 +1,13 @@
-package ru.guteam.restaurantservice.service;
+package ru.guteam.restaurantservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.guteam.restaurantservice.dto.RestaurantDTO;
-import ru.guteam.restaurantservice.exception.DishNotFountException;
 import ru.guteam.restaurantservice.exception.RestaurantNotFoundException;
-import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.model.Restaurant;
 import ru.guteam.restaurantservice.repo.RestaurantRepo;
+import ru.guteam.restaurantservice.service.RestaurantService;
 import ru.guteam.restaurantservice.util.Mapper;
 
 import java.util.List;

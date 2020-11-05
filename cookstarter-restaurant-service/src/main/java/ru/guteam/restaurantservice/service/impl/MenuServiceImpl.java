@@ -1,4 +1,4 @@
-package ru.guteam.restaurantservice.service;
+package ru.guteam.restaurantservice.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -7,6 +7,7 @@ import ru.guteam.restaurantservice.dto.MenuDTO;
 import ru.guteam.restaurantservice.exception.GetMenuException;
 import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.repo.DishRepo;
+import ru.guteam.restaurantservice.service.MenuService;
 
 import java.util.List;
 
@@ -26,5 +27,11 @@ public class MenuServiceImpl implements MenuService {
     public List<Dish> getMenu(Long restaurantId) {
         return dishRepo.findAllByRestaurantId(restaurantId)
                 .orElseThrow(() -> new GetMenuException(restaurantId));
+    }
+
+    @Override
+    @Transactional
+    public void deleteMenuByRestaurantId(Long restaurantId) {
+        dishRepo.deleteAllByRestaurantId(restaurantId);
     }
 }

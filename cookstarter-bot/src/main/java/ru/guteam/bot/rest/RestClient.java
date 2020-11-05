@@ -14,12 +14,10 @@ public class RestClient {
         this.restTemplate = restTemplate;
     }
 
-
-    private String getToken(String username, String password) {
+    public String getToken(String username, String password) {
         AuthRequest authRequest = new AuthRequest(username, password);
 
         return restTemplate.postForObject("http://cookstarter-customer-service.herokuapp.com/auth",
                                               authRequest, String.class);
-
     }
 }
