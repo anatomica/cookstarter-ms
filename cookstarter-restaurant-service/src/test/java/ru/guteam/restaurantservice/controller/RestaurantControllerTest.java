@@ -1,4 +1,4 @@
-package ru.guteam.restaurant_service.controller;
+package ru.guteam.restaurantservice.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,7 +9,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.guteam.restaurantservice.controller.RestaurantController;
 import ru.guteam.restaurantservice.dto.RestaurantDTO;
 import ru.guteam.restaurantservice.model.Restaurant;
 import ru.guteam.restaurantservice.service.ContactService;
@@ -19,7 +18,7 @@ import ru.guteam.restaurantservice.service.RestaurantService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static ru.guteam.restaurantservice.controller.util.Token.TOKEN;

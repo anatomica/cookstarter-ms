@@ -1,4 +1,4 @@
-package ru.guteam.restaurant_service.controller.util;
+package ru.guteam.restaurantservice.controller.util;
 
 import lombok.experimental.UtilityClass;
 
