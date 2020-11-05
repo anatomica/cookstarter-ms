@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import ru.guteam.cookstarter.api.dto.StatusResponse;
+import ru.guteam.picture_service.exception.AuthorizationException;
 import ru.guteam.picture_service.exception.NotPictureException;
 
 import static org.springframework.http.HttpStatus.UNAUTHORIZED;
@@ -27,5 +28,11 @@ public class ErrorController {
     public ResponseEntity<StatusResponse> pictureError(NotPictureException e) {
         log.error("Ошибка при получении картинки '{}'", e.getMessage());
         return error(UNAUTHORIZED, "Ошибка при получении картинки");
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StatusResponse> authError(RuntimeException e) {
+        log.error("Ошибка авторизации: {}", e.getMessage());
+        return error(UNAUTHORIZED, e.getMessage());
     }
 }

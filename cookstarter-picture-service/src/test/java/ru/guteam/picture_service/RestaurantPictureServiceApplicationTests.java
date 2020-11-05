@@ -30,6 +30,10 @@ import static ru.guteam.cookstarter.api.dto.RequestMessageHeaders.JWT_TOKEN_HEAD
 @SpringBootTest
 @AutoConfigureMockMvc
 class RestaurantPictureServiceApplicationTests {
+    private static final String GET_PICTURE_URL = "/picture/restaurant/get/{pictureId}";
+    private static final String ADD_PICTUTE_URL = "/picture/restaurant/api/add";
+    private static final String UPDATE_PICTURE_URL = "/picture/restaurant/api/update/{pictureId}";
+    private static final String DELETE_PICTURE_URL = "/picture/restaurant/api/delete/{pictureId}";
 
     @Autowired
     private RestaurantPictureService restaurantPictureService;
@@ -37,6 +41,9 @@ class RestaurantPictureServiceApplicationTests {
     private MockMvc mockMvc;
     @Autowired
     private RestaurantPictureRepository restaurantPictureRepository;
+
+    @Value("${app.auth-type}")
+    private String authType;
 
     @Value("${app.path-directory-test}")
     private String pathPic;
@@ -47,7 +54,7 @@ class RestaurantPictureServiceApplicationTests {
 
     @PostConstruct
     public void setFile() throws IOException {
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjM0NTAwMDcwLCJpYXQiOjE2MDI5NjQwNzB9.1HLjqDbZz5VN6B268zQA5CVCQ0maYmyaWcY6YOMoMow";
+        token = authType + " eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyIiwiZXhwIjoxNjM0NTAwMDcwLCJpYXQiOjE2MDI5NjQwNzB9.1HLjqDbZz5VN6B268zQA5CVCQ0maYmyaWcY6YOMoMow";
         Path testPic = Paths.get(pathPic,"5mm.jpg");
         file = new MockMultipartFile("file","5mm.jpg","image",Files.readAllBytes(testPic.toAbsolutePath()));
     }
@@ -66,7 +73,7 @@ class RestaurantPictureServiceApplicationTests {
     public void getPicture() throws Exception {
         id = restaurantPictureService.insert(file);
         mockMvc.perform(
-                get("/picture/restaurant/get/{pictureId}",id)
+                get(GET_PICTURE_URL,id)
                         .param(JWT_TOKEN_HEADER, token))
                 .andExpect(status().isOk());
     }
@@ -74,7 +81,7 @@ class RestaurantPictureServiceApplicationTests {
     @Test
     public void addPicture() throws Exception {
         mockMvc.perform(
-                multipart("/picture/restaurant/api/add")
+                multipart(ADD_PICTUTE_URL)
                         .file((MockMultipartFile) file)
                         .header(JWT_TOKEN_HEADER, token))
                 .andExpect(status().isOk());
@@ -84,7 +91,7 @@ class RestaurantPictureServiceApplicationTests {
     public void updatePicture() throws Exception {
         id = restaurantPictureService.insert(file);
         mockMvc.perform(
-                multipart("/picture/restaurant/api/update/{pictureId}", id)
+                multipart(UPDATE_PICTURE_URL, id)
                         .file((MockMultipartFile) file)
                         .header(JWT_TOKEN_HEADER, token))
                 .andExpect(status().isOk());
@@ -94,7 +101,7 @@ class RestaurantPictureServiceApplicationTests {
     public void deletePicture() throws Exception {
         id = restaurantPictureService.insert(file);
         mockMvc.perform(
-                get("/picture/restaurant/api/delete/{pictureId}",id)
+                get(DELETE_PICTURE_URL,id)
                         .header(JWT_TOKEN_HEADER, token))
                 .andExpect(status().isOk());
     }
