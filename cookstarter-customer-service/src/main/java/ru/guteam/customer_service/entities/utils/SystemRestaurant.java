@@ -16,16 +16,16 @@ import javax.validation.constraints.NotNull;
 @ApiModel(description = "Class representing data about restaurant for his registration in the application.")
 public class SystemRestaurant {
 
-    @NotNull
+    @NotNull(message = "This field is required")
     @ApiModelProperty(notes = "Unique identifier of the restaurant. No two restaurants can have the same id.", example = "1", required = true, position = 1)
     private Long id;
-    @NotNull
+    @NotNull(message = "This field is required")
     @ApiModelProperty(notes = "Unique username", example = "89110002233", required = true, position = 2)
     private String username;
-    @NotNull
+    @NotNull(message = "This field is required")
     @ApiModelProperty(notes = "User's password", example = "1000", required = true, position = 3)
     private String password;
-    @NotNull
+    @NotNull(message = "This field is required")
     @ApiModelProperty(notes = "User's authorities", example = "RESTAURANT_MANAGER", required = true, position = 4)
     private RolesTypeEnum role;
 

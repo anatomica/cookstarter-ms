@@ -42,8 +42,7 @@ public class RegistrationController {
 
     @ApiOperation("Returns HttpStatus of trying registration procedure for restaurants. Inside the object of SystemRestaurant type is data about it.")
     @PostMapping(value = "/restaurant", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> restaurantRegistration(@RequestBody @ApiParam("Cannot be empty") SystemRestaurant systemRestaurant) {
-        // обсудить, по идее эта проверка дб отдельным запросом
+    public ResponseEntity<?> restaurantRegistration(@RequestBody @ApiParam("Cannot be empty") @Valid SystemRestaurant systemRestaurant) {
         String username = systemRestaurant.getUsername();
         if (usersService.existsByUsername(username)) {
             return new ResponseEntity<>("Ресторан с логином: " + username + " уже существует", HttpStatus.CONFLICT);
