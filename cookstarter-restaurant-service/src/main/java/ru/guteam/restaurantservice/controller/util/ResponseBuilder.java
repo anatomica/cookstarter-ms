@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import ru.guteam.restaurantservice.dto.ContactDTO;
+import ru.guteam.restaurantservice.dto.MessageDTO;
 import ru.guteam.restaurantservice.model.Contact;
 import ru.guteam.restaurantservice.model.Restaurant;
 
@@ -32,8 +33,8 @@ public class ResponseBuilder {
         return ResponseEntity.status(status).build();
     }
 
-    public ResponseEntity<String> error(String message, HttpStatus status) {
-        return ResponseEntity.status(status).body(message);
+    public ResponseEntity<MessageDTO> error(String message, HttpStatus status) {
+        return ResponseEntity.status(status).body(new MessageDTO(message));
     }
 
     public ResponseEntity<String> error(HttpStatus status) {

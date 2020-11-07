@@ -21,5 +21,6 @@ public class Contact {
     private String location;
     private String mail;
     private String website;
+    @Column(unique = true)
     private Long restaurantId;
 }
