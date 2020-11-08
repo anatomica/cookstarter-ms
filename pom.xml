@@ -12,6 +12,11 @@
     <modules>
         <module>cookstarter-model</module>
         <module>cookstarter-order-service</module>
+        <module>cookstarter-customer-service</module>
+        <module>cookstarter-bot</module>
+        <module>cookstarter-picture-service</module>
+        <module>cookstarter-restaurant-service</module>
+        <module>cookstarter-restaurant-web-service</module>
     </modules>
 
     <groupId>ru.guteam</groupId>
@@ -23,15 +28,16 @@
 
     <properties>
         <java.version>11</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
         <lombok.version>1.18.12</lombok.version>
         <postgresql.version>42.2.14</postgresql.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

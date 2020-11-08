@@ -7,7 +7,7 @@ import ru.guteam.customer_service.entities.User;
 import java.util.Optional;
 
 @Repository
-public interface UsersRepository extends JpaRepository<User, Integer> {
+public interface UsersRepository extends JpaRepository<User, Long> {
     Optional<User> findOneByUsername(String username);
     boolean existsByUsername(String username);
 }

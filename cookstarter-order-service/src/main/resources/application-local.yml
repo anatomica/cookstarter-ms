@@ -16,5 +16,5 @@ spring:
         default_schema: orders
 
 app:
-  customer-service:
-    host: http://localhost:8186
+  jwt:
+    secret-key: topsecretkey123rieubherotuh3498th398gh395g8h598gh4g8gidufghdifughi43gg4334t3h4gi34uhgi35uhgi35ughi45ugho98dhf98bhg

@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import ru.guteam.customer_service.entities.Role;
 
 @Repository
-public interface RolesRepository extends JpaRepository<Role, Long> {
+public interface RolesRepository extends JpaRepository<Role, Integer> {
 	Role findOneByName(String name);
 }

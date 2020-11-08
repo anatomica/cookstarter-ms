@@ -39,13 +39,11 @@ values
 
 insert into users.customers (email, first_name, last_name)
 values
-('admin@gmail.com', 'admin','admin'),
 ('customer@gmail.com', 'customer','customer');
 
 
 insert into users.users (id, user_type, user_id, username, password, role_id, enable)
 values
 (1, 'C', 1, '100', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', '1', 'true'),
-(2, 'C', 2, '200', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', '1', 'true'),
-(3, 'R', 304, '1', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', '2', 'true'),
-(4, 'R', 405, '2', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', '3', 'true');
+(2, 'R', 304, '1', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', '2', 'true'),
+(3, 'R', 405, '2', '$2a$04$Fx/SX9.BAvtPlMyIIqqFx.hLY2Xp8nnhpzvEEVINvVpwIPbA3v/.i', '3', 'true');
