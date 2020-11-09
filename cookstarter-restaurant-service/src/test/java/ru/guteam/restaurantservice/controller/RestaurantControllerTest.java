@@ -42,7 +42,7 @@ public class RestaurantControllerTest {
     @Test
     public void givenRestaurant_whenAdd_thenStatusOkAndRestaurantId() throws Exception {
         Long id = 1l;
-        RestaurantDTO restaurant = new RestaurantDTO("Some Restaurant", "some discription");
+        RestaurantDTO restaurant = new RestaurantDTO("Some Restaurant", "some discription", 123l);
         Mockito.when(restaurantService.saveRestaurant(restaurant)).thenReturn(id);
 
         mockMvc.perform(
