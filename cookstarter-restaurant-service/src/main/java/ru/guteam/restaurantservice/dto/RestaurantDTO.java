@@ -16,4 +16,5 @@ public class RestaurantDTO {
     private String name;
     @NotNull
     private String description;
+    private Long pictureId;
 }
