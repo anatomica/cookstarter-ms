@@ -30,6 +30,12 @@ public class Mapper {
         return dish;
     }
 
+    public DishDTO mapToDishDTO(Dish dish) {
+        DishDTO dishDTO = new DishDTO();
+        modelMapper.map(dish, dishDTO);
+        return dishDTO;
+    }
+
     public Contact mapToContact(ContactDTO contactDTO) {
         Contact contact = new Contact();
         modelMapper.map(contactDTO, contact);
