@@ -2,17 +2,27 @@
     <div class="col-md-12">
         <h4 style="color: #24305E">Регистрация ресторана</h4>
         <hr style="color: #24305E; background-color: #24305E"/>
-        <form method="post" id="restaurantForm">
+        <form name="restaurantForm" novalidate>
             <div class="form-group">
                 <div class="col-md-6">
-                    <label for="RestaurantName">Название ресторана:</label>
-                    <input type="text" class="form-control" placeholder="Название ресторана"
-                           id="RestaurantName" ng-model="restaurant.name">
+                    <label for="restaurantName">Название ресторана:</label>
+                    <input type="text" class="form-control" required placeholder=""
+                           id="restaurantName" ng-model="restaurant.name" name="restaurantName">
+                    <span style="color:red" ng-show="restaurantForm.restaurantName.$invalid">
+  							<span ng-show="restaurantForm.restaurantName.$error.required">
+                                Поле обязательное для заполнения
+                            </span>
+                    </span>
                 </div>
                 <div class="col-md-6">
                     <label for="description">Описание:</label>
-                    <textarea class="form-control"
+                    <textarea class="form-control" name="description" required
                               id="description" rows="3" ng-model="restaurant.description"></textarea>
+                    <span style="color:red" ng-show="restaurantForm.description.$invalid">
+  							<span ng-show="restaurantForm.description.$error.required">
+                                Поле обязательное для заполнения
+                            </span>
+                    </span>
                 </div>
             </div>
         </form>
@@ -33,8 +43,9 @@
             </div>
         </form>
         <br>
-        <a class="btn text-white" style="background-color: #374785"
-           ng-click="addRestaurant(restaurant)"  form="restaurantForm"
-           href="#/restaurants">Создать карточку ресторана</a>
+        <button class="btn text-white" style="background-color: #374785"
+           ng-click="addRestaurant(restaurant)"
+           ng-disabled="restaurantForm.restaurantName.$invalid ||
+               restaurantForm.description.$invalid || !isUploadImj">Сохранить</button>
     </div>
 </div>

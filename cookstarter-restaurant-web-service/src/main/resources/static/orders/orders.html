@@ -24,7 +24,8 @@
                     <tbody>
                     <tr style="background-color: #A8D0E6; color: #24305E"  ng-repeat="item in orders">
                         <td>
-                            <b>{{item.customerId}}</b>
+                            <b>{{item.customerId.firstName}}</b><br>
+                            <b>{{item.customerId.lastName}}</b>
                         </td>
                         <td>
                             <b>{{item.restaurantId}}</b>
