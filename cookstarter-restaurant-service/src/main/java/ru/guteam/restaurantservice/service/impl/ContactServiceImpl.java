@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.guteam.restaurantservice.dto.ContactDTO;
 import ru.guteam.restaurantservice.exception.ContactNotFoundException;
+import ru.guteam.restaurantservice.exception.DuplicateException;
 import ru.guteam.restaurantservice.model.Contact;
 import ru.guteam.restaurantservice.repo.ContactRepo;
 import ru.guteam.restaurantservice.service.ContactService;
@@ -19,6 +20,9 @@ public class ContactServiceImpl implements ContactService {
     @Override
     @Transactional
     public void saveContact(ContactDTO contact) {
+        if (contactRepo.findByRestaurantId(contact.getRestaurantId()).isPresent()) {
+            throw new DuplicateException(String.valueOf(contact.getRestaurantId()));
+        }
         contactRepo.save(mapper.mapToContact(contact));
     }
 

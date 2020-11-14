@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.context.request.WebRequest;
+import ru.guteam.restaurantservice.dto.MessageDTO;
+import ru.guteam.restaurantservice.exception.DuplicateException;
 import ru.guteam.restaurantservice.exception.NotFountException;
 
 import java.net.ConnectException;
@@ -40,10 +42,16 @@ public class ErrorController {
     }
 
     @ExceptionHandler(JwtException.class)
-    public ResponseEntity jwtError(@RequestHeader(JWT_HEADER) String token, Exception e) {
+    public ResponseEntity<MessageDTO> jwtError(WebRequest request, Exception e) {
         String message = "Error checking the token";
-        log.error(message + " : " + token, e);
-        return error(message, BAD_REQUEST);
+        log.error(message + " : " + request.getHeader(JWT_HEADER), e);
+        return error(message, FORBIDDEN);
+    }
+
+    @ExceptionHandler(DuplicateException.class)
+    public ResponseEntity<MessageDTO> duplicateError(Exception e) {
+        log.error(e.getMessage(), e);
+        return error(e.getMessage(), CONFLICT);
     }
 
     @ExceptionHandler(NotFountException.class)

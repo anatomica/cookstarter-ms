@@ -36,7 +36,7 @@ public class ContactController {
     }
 
     @CrossOrigin
-    @PostMapping("update/")
+    @PostMapping("/update")
     public ResponseEntity<HttpStatus> updateContact(@RequestHeader(JWT_HEADER) String token,
                                                     @RequestBody ContactDTO contact) {
         contactService.updateContact(contact);
