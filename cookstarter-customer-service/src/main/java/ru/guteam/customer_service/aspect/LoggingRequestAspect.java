@@ -8,8 +8,7 @@ import org.aspectj.lang.annotation.Before;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import ru.guteam.customer_service.controllers.utils.CustomerTokenResponse;
-import ru.guteam.customer_service.controllers.utils.RestaurantTokenResponse;
+import ru.guteam.customer_service.controllers.utils.TokenResponse;
 import ru.guteam.customer_service.controllers.utils.TokenRequest;
 import ru.guteam.customer_service.entities.utils.SystemCustomer;
 import ru.guteam.customer_service.entities.utils.SystemRestaurant;
@@ -40,15 +39,9 @@ public class LoggingRequestAspect {
             return;
         }
         if (response.getStatusCode().equals(HttpStatus.OK) && Objects.requireNonNull(response.getBody()).getClass() != null) {
-            if (response.getBody().getClass().equals(CustomerTokenResponse.class)) {
-                CustomerTokenResponse customerResponse = (CustomerTokenResponse) response.getBody();
+                TokenResponse customerResponse = (TokenResponse) response.getBody();
                 log.info("Для клиента с логином: " + authRequest.getUsername() +
                         " и паролем: " + authRequest.getPassword() + " сгенерирован токен: " + customerResponse.getToken());
-            } else {
-                RestaurantTokenResponse restaurantResponse = (RestaurantTokenResponse) response.getBody();
-                log.info("Для ресторана с логином: " + authRequest.getUsername() +
-                        " и паролем: " + authRequest.getPassword() + " сгенерирован токен: " + restaurantResponse.getToken());
-            }
         }
     }
 

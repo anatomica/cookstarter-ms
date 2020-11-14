@@ -9,9 +9,8 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import ru.guteam.customer_service.controllers.utils.RestaurantTokenResponse;
+import ru.guteam.customer_service.controllers.utils.TokenResponse;
 import ru.guteam.customer_service.controllers.utils.TokenRequest;
-import ru.guteam.customer_service.controllers.utils.CustomerTokenResponse;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -23,30 +22,18 @@ public class AuthControllerIntegrationTests {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void whenCustomerAuthenticated_thenStatus200() {
+    public void whenUserAuthenticated_thenStatus200() {
         TokenRequest request = new TokenRequest();
         request.setUsername("100");
         request.setPassword("100");
-        ResponseEntity<CustomerTokenResponse> response = restTemplate.postForEntity("/auth", new HttpEntity<>(request), CustomerTokenResponse.class);
+        ResponseEntity<TokenResponse> response = restTemplate.postForEntity("/auth", new HttpEntity<>(request), TokenResponse.class);
         assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        CustomerTokenResponse customerResponse = response.getBody();
+        TokenResponse customerResponse = response.getBody();
         assert response.getBody() != null;
-        assertThat(customerResponse, is(instanceOf(CustomerTokenResponse.class)));
+        assertThat(customerResponse, is(instanceOf(TokenResponse.class)));
         assertThat(customerResponse.getToken(), is(notNullValue()));
     }
 
-    @Test
-    public void whenRestaurantAuthenticated_thenStatus200() {
-        TokenRequest request = new TokenRequest();
-        request.setUsername("1");
-        request.setPassword("100");
-        ResponseEntity<RestaurantTokenResponse> response = restTemplate.postForEntity("/auth", new HttpEntity<>(request), RestaurantTokenResponse.class);
-        assertThat(response.getStatusCode(), is(HttpStatus.OK));
-        assert response.getBody() != null;
-        assertThat(response.getBody(), is(instanceOf(RestaurantTokenResponse.class)));
-        assertThat(response.getBody().getToken(), is(notNullValue()));
-        assertThat(response.getBody().getId(), is(notNullValue()));
-    }
 
     @Test
     public void whenUserNotAuthenticated_thenStatus401() {
