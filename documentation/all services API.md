@@ -54,7 +54,11 @@ POST /auth
 {
     "status": "OK",
     "token": "token with user details and role"
-
+}
+```
+```json5
+{
+    "id": "1"//id пользователя или ресторана
 }
 ```
 
