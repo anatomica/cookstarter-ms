@@ -8,6 +8,8 @@ import ru.guteam.customer_service.entities.User;
 import ru.guteam.customer_service.entities.utils.SystemCustomer;
 import ru.guteam.customer_service.repositories.CustomersRepository;
 
+import java.util.Optional;
+
 @Service
 public class CustomersService {
     private CustomersRepository customersRepository;
@@ -36,5 +38,9 @@ public class CustomersService {
 
     public boolean existsByEmail(String email) {
         return customersRepository.existsByEmail(email);
+    }
+
+    public Optional<Customer> findById(Long id) {
+        return customersRepository.findById(id);
     }
 }

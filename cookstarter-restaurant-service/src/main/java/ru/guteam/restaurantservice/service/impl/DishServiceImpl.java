@@ -16,6 +16,7 @@ public class DishServiceImpl implements DishService {
 
     @Override
     @Transactional
+
     public void saveDish(Dish dish) {
         dishRepo.save(dish);
     }

@@ -14,8 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import ru.guteam.customer_service.controllers.utils.JwtTokenUtil;
-import ru.guteam.customer_service.controllers.utils.CustomerTokenResponse;
-import ru.guteam.customer_service.controllers.utils.RestaurantTokenResponse;
+import ru.guteam.customer_service.controllers.utils.TokenResponse;
 import ru.guteam.customer_service.controllers.utils.TokenRequest;
 import ru.guteam.customer_service.entities.User;
 import ru.guteam.customer_service.entities.utils.enums.UsersTypeEnum;
@@ -43,10 +42,7 @@ public class AuthController {
         UserDetails userDetails = usersService.loadUserByUsername(authRequest.getUsername());
         String token = jwtTokenUtil.generateToken(userDetails);
         User user = usersService.findByUsername(authRequest.getUsername());
-        if (user.getUserType().equals(UsersTypeEnum.RESTAURANT))
-            return new ResponseEntity<>(new RestaurantTokenResponse(token, user.getCustomer().getId()), HttpStatus.OK);
-        else
-            return new ResponseEntity<>(new CustomerTokenResponse(token), HttpStatus.OK);
+        return new ResponseEntity<>(new TokenResponse(token, user.getCustomer().getId()), HttpStatus.OK);
     }
 
 }

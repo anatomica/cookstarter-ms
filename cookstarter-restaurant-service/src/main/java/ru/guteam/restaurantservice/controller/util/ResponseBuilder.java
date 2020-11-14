@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import ru.guteam.restaurantservice.dto.ContactDTO;
 import ru.guteam.restaurantservice.dto.MessageDTO;
 import ru.guteam.restaurantservice.model.Contact;
-import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.model.Restaurant;
 
 import java.util.List;
