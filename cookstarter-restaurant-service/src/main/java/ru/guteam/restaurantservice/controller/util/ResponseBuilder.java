@@ -25,6 +25,10 @@ public class ResponseBuilder {
         return ResponseEntity.status(status).body(restaurant);
     }
 
+    public ResponseEntity<Dish> dishAndStatus(Dish dish, HttpStatus status) {
+        return ResponseEntity.status(status).body(dish);
+    }
+
     public ResponseEntity<ContactDTO> contactAndStatus(ContactDTO contact, HttpStatus status) {
         return ResponseEntity.status(status).body(contact);
     }

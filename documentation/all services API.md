@@ -54,7 +54,11 @@ POST /auth
 {
     "status": "OK",
     "token": "token with user details and role"
-
+}
+```
+```json5
+{
+    "id": "1"//id пользователя или ресторана
 }
 ```
 
@@ -68,7 +72,8 @@ POST /restaurant/add
 ```json5
 {
   "name": "first restaurant",//обязательно
-  "description": "this is Russian restaurant"//обязательно
+  "description": "this is Russian restaurant",//обязательно
+  "picture": 1 // restaurant picture id // не обязательно
 }
 ```
 ответ
@@ -207,12 +212,14 @@ GET /menu/get{restaurantId}
 ```json5
 [
           {
+          "id": 1,
           "name": 'string',
           "price": 0.99, 
           "description": 'string', 
           "picture": 10 
            },
           {
+          "id": 2,
           "name": 'string',
           "price": 0.99, 
           "description": 'string', 
@@ -246,11 +253,32 @@ POST /dish/add
  }
 ```
 
+**Получеybt блюда**
+
+POST /dish/get/{id}
+ответ
+```json5
+{
+ "id": 1,
+ "name": "string",//обязательно
+ "price": 0.99,//обязательно
+ "description": "string",//обязательно
+ "pictureId": 123,
+  "restaurantId": 1 //обязательно
+}
+```
+```json5
+{
+      "status": 'ok'     
+ }
+```
+
 **Обновление блюда**
 
 POST /dish/update
 ```json5
 {
+  "id": 1,
   "name": "string",//обязательно
   "price": 1000,//обязательно
   "description": "string",//обязательно
@@ -270,11 +298,7 @@ POST /dish/update
 GET /dish/delete
 ```json5
 {
-  "name": "borsch",//обязательно
-  "price": 1000,//обязательно
-  "description": "super soup",//обязательно
-  "pictureId": 8,
-  "restaurantId": 1 //обязательно
+  "id": 1
 }
 ```
 ответ
@@ -361,7 +385,7 @@ GET /contact/delete{restaurantId}
 
 ### Picture service API
 
-Любой запрос должен содержать header "jwt-token" с токеном, полученным при авторизации.
+Любой запрос должен содержать header "Authentication" с Bearer + токеном, полученным при авторизации.
 
 
 **Добавление картинки**
@@ -394,7 +418,7 @@ POST /picture/update/{id}
 
 **Получение картинки**
 
-GET /picture/get/{id}
+GET /picture/get/{id}/{token}
 
 ответ
 
@@ -421,7 +445,7 @@ GET /picture/delete/{id}
 
 ### Order service API
 
-Любой запрос должен содержать header "jwt-token" с токеном, полученным при авторизации.
+Любой запрос должен содержать header "Authentication" с Bearer + токеном, полученным при авторизации.
 
 **Добавление нового заказа**
 

@@ -7,7 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.guteam.restaurantservice.dto.DishDTO;
+import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.service.DishService;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -29,7 +29,7 @@ public class DishControllerTest {
 
     @Test
     public void givenDish_whenAdd_thenStatusOk() throws Exception {
-        DishDTO dish = new DishDTO();
+        Dish dish = new Dish();
 
         mockMvc.perform(
                 post(ADD_DISH)
@@ -41,7 +41,7 @@ public class DishControllerTest {
 
     @Test
     public void givenDish_whenUpdate_thenStatusOk() throws Exception {
-        DishDTO dish = new DishDTO();
+        Dish dish = new Dish();
 
         mockMvc.perform(
                 post(UPDATE_DISH)
@@ -53,7 +53,7 @@ public class DishControllerTest {
 
     @Test
     public void givenDish_whenDelete_thenStatusOk() throws Exception {
-        DishDTO dish = new DishDTO();
+        Dish dish = new Dish();
 
         mockMvc.perform(
                 get(DELETE_DISH)

@@ -8,8 +8,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.guteam.restaurantservice.dto.DishDTO;
 import ru.guteam.restaurantservice.dto.MenuDTO;
+import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.service.MenuService;
 
 import java.util.ArrayList;
@@ -50,8 +50,8 @@ public class MenuControllerTest {
     public void givenRestaurantId_whenGet_thenStatusOkAndList() throws Exception {
         Long restaurantId = anyLong();
         List menu = new ArrayList();
-        menu.add(new DishDTO());
-        menu.add(new DishDTO());
+        menu.add(new Dish());
+        menu.add(new Dish());
 
         Mockito.when(menuService.getMenu(restaurantId)).thenReturn(menu);
 

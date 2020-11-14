@@ -9,9 +9,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
-import ru.guteam.customer_service.controllers.utils.CustomerTokenResponse;
-import ru.guteam.customer_service.controllers.utils.RestaurantTokenResponse;
-import ru.guteam.customer_service.controllers.utils.TokenRequest;
 import ru.guteam.customer_service.entities.utils.SystemCustomer;
 import ru.guteam.customer_service.entities.utils.SystemRestaurant;
 import ru.guteam.customer_service.entities.utils.validation.ValidationErrorDTO;
@@ -88,14 +85,5 @@ public class RegistrationControllerIntegrationTests {
         assert response.getBody() != null;
         assertThat(response.getBody(), is(notNullValue()));
     }
-
-//    @Test
-//    public void whenRestaurantsRoleIsWrong_thenStatus400() throws IOException, URISyntaxException {
-//        SystemRestaurant restaurant = utils.readJson("restaurantWithWrongRole.json", SystemRestaurant.class);
-//        ResponseEntity<String> response = restTemplate.postForEntity("/reg/restaurant", new HttpEntity<>(restaurant), String.class);
-//        assertThat(response.getStatusCode(), is(HttpStatus.BAD_REQUEST));
-//        assert response.getBody() != null;
-//        assertThat(response.getBody(), is(notNullValue()));
-//    }
 
 }
