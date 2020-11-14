@@ -4,14 +4,9 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 import ru.guteam.restaurantservice.dto.ContactDTO;
-import ru.guteam.restaurantservice.dto.DishDTO;
 import ru.guteam.restaurantservice.dto.RestaurantDTO;
 import ru.guteam.restaurantservice.model.Contact;
-import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.model.Restaurant;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Component
 @AllArgsConstructor
@@ -22,18 +17,6 @@ public class Mapper {
         Restaurant restaurant = new Restaurant();
         modelMapper.map(restaurantDTO, restaurant);
         return restaurant;
-    }
-
-    public Dish mapToDish(DishDTO dishDTO) {
-        Dish dish = new Dish();
-        modelMapper.map(dishDTO, dish);
-        return dish;
-    }
-
-    public DishDTO mapToDishDTO(Dish dish) {
-        DishDTO dishDTO = new DishDTO();
-        modelMapper.map(dish, dishDTO);
-        return dishDTO;
     }
 
     public Contact mapToContact(ContactDTO contactDTO) {

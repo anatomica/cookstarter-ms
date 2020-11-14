@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import ru.guteam.restaurantservice.dto.ContactDTO;
 import ru.guteam.restaurantservice.dto.MessageDTO;
 import ru.guteam.restaurantservice.model.Contact;
+import ru.guteam.restaurantservice.model.Dish;
 import ru.guteam.restaurantservice.model.Restaurant;
 
 import java.util.List;
@@ -23,6 +24,10 @@ public class ResponseBuilder {
 
     public ResponseEntity<Restaurant> restaurantAndStatus(Restaurant restaurant, HttpStatus status) {
         return ResponseEntity.status(status).body(restaurant);
+    }
+
+    public ResponseEntity<Dish> dishAndStatus(Dish dish, HttpStatus status) {
+        return ResponseEntity.status(status).body(dish);
     }
 
     public ResponseEntity<ContactDTO> contactAndStatus(ContactDTO contact, HttpStatus status) {

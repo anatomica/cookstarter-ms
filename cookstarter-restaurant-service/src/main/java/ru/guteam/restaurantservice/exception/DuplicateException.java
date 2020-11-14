@@ -2,6 +2,6 @@ package ru.guteam.restaurantservice.exception;
 
 public class DuplicateException extends RuntimeException {
     public DuplicateException(String message) {
-        super("Duplicate restaurantId detected: " + message);
+        super("Duplicate detected: " + message);
     }
 }

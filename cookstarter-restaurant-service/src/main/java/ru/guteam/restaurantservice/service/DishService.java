@@ -1,12 +1,13 @@
 package ru.guteam.restaurantservice.service;
 
-import ru.guteam.restaurantservice.dto.DishDTO;
 import ru.guteam.restaurantservice.model.Dish;
 
 public interface DishService {
-    void saveDish(DishDTO dish);
+    void saveDish(Dish dish);
 
-    void updateDish(DishDTO dish);
+    Dish findById(Long id);
 
-    void deleteDish(DishDTO dish);
+    void updateDish(Dish dish);
+
+    void deleteDish(Long id);
 }
